@@ -41,17 +41,6 @@ include("./includes/header.php");
         </table>
     </div>
 </div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 ">
-            <div class="mb-3">
-                <label for="studentName" class="formlabel mt-1 fs-6 text-primary">Student Name</label>
-                <input type="text" class="form-control mt-1">
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -64,12 +53,43 @@ include("./includes/header.php");
             <div class="modal-body">
                 <div class="container-fluid">
                     <div class="row">
-                       <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 ">
+                        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 ">
                             <div class="mb-3">
-                                <label for="studentName" class="formlabel mt-1 fs-6 text-primary">Student Name</label>
+                                <label for="studentName" class="formlabel mt-1  text-primary">Name</label>
+                                <input type="text" class="form-control mt-1" id="studentName" name="student_name">
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 ">
+                            <div class="mb-3">
+                                <label for="phoneNo" class="formlabel mt-1  text-primary">Father Name</label>
                                 <input type="text" class="form-control mt-1">
                             </div>
-                        </div> 
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 ">
+                            <div class="mb-3">
+                                <label for="phoneNo" class="formlabel mt-1  text-primary">Mother Name</label>
+                                <input type="email" class="form-control mt-1">
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 ">
+                            <div class="mb-3">
+                                <label for="phoneNo" class="formlabel mt-1  text-primary">Dob</label>
+                                <input type="text" class="form-control mt-1">
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 ">
+                            <div class="mb-3">
+                                <label for="email" class="formlabel mt-1  text-primary">Email</label>
+                                <input type="email" class="form-control mt-1">
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 ">
+                            <div class="mb-3">
+                                <label for="phoneNo" class="formlabel mt-1  text-primary">Phone No</label>
+                                <input type="text" class="form-control mt-1">
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

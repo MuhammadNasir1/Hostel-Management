@@ -22,16 +22,11 @@
 
       <ul class="list-unstyled px-2">
         <li class="active"><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-home"></i> Dashboard</a></li>
-        <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-list"></i>
-            Projects</a></li>
-        <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block d-flex justify-content-between">
-            <span><i class="fal fa-comment"></i> Messages</span>
-            <span class="bg-dark rounded-pill text-white py-0 px-2">02</span>
-          </a>
-        </li>
-        <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-envelope-open-text"></i> Services</a></li>
+        <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-home"></i> Fees</a></li>
+        <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-home"></i> Students</a></li>
+        <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-envelope-open-text"></i> Courses</a></li>
         <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-users"></i>
-            Customers</a></li>
+            Rooms</a></li>
       </ul>
       <hr class="h-color mx-2">
 
@@ -49,7 +44,7 @@
         <div class="container-fluid">
           <div class="d-flex justify-content-between d-md-none d-block">
             <button class="btn px-1 py-0 open-btn me-2"><i class="fal fa-stream"></i></button>
-            <a class="navbar-brand fs-4" href="#"><span class="bg-dark rounded px-2 py-0 text-white">CL</span></a>
+            <a class="navbar-brand fs-4" href="#"><span class="bg-dark rounded px-2 py-0 text-white">HMS</span></a>
 
           </div>
           <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +53,7 @@
           <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Profile</a>
+                <a class="nav-link active" aria-current="page" href="#">..</a>
               </li>
 
             </ul>
@@ -68,5 +63,3 @@
       </nav>
 
       <div class="dashboard-content px-3 pt-4">
-  
-      
