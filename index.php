@@ -1,6 +1,8 @@
 <?php
-include("./includes/header.php")
+$title = "HOME";
+include("./includes/header.php");
 ?>
+
 
 
 <?php
