@@ -4,6 +4,7 @@ $username  = "root";
 $password = "";
 $database = "hostal_management";
 $conn = mysqli_connect($server_name, $username, $password, $database);
+session_start();
 if (mysqli_connect_errno()) {
     echo "" . mysqli_connect_error();
 }

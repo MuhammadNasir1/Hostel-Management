@@ -7,20 +7,27 @@
 }
 
 :root {
-  --primary-color: #f44336;
+  /* --primary-color: #f44336; */
+  --primary-color: #0d2d64;
   --secondary-color: #000;
   --light-color: #000;
   --dark-color: #000;
 }
 
+/* custom style  */
+.text-primary {
+  color: var(--primary-color) !important;
+}
+.bg-primary {
+  background-color: var(--primary-color) !important;
+}
 .login {
-  margin: 200px auto;
+  margin: 20px auto;
   padding: 40px 50px;
   max-width: 500px;
   border-radius: 5px;
   background: #fff;
   box-shadow: 1px 1px 1px #666;
-  box-shadow: 0px 0px 50px 30px #7a7a7a38;
 }
 
 .login input {
@@ -31,6 +38,7 @@
   padding: 14px 12px;
   font-size: 16px;
   border-radius: 2px;
+  font-family: Raleway, sans-serif;
 }
 
 .login input[type="text"],
@@ -39,18 +47,19 @@
   transition: 0.2s;
 }
 
+.login input[type="text"]:hover {
+  border-color: #f44336;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
 .login input[type="submit"] {
   border: none;
-  background: #ef5350;
+  background: var(--primary-color);
   color: white;
   font-weight: bold;
   transition: 0.2s;
   margin: 20px 0px;
-}
-
-.login input[type="submit"]:hover {
-  background: var(--primary-color);
-  cursor: pointer;
 }
 
 .login h2 {
@@ -84,4 +93,49 @@
 
 .login a:visited {
   color: inherit;
+}
+
+.login a:hover {
+  text-decoration: underline;
+}
+#side_nav {
+  background: #07142b;
+  min-width: 250px;
+  max-width: 250px;
+  transition: all 0.3s;
+}
+
+.content {
+  min-height: 100vh;
+  width: 100%;
+}
+
+hr.h-color {
+  background: #eee;
+}
+
+.sidebar li.active {
+  background: #eee;
+  border-radius: 8px;
+}
+
+.sidebar li.active a,
+.sidebar li.active a:hover {
+  color: #000;
+}
+
+.sidebar li a {
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  #side_nav {
+    margin-left: -250px;
+    position: absolute;
+    min-height: 100vh;
+    z-index: 1;
+  }
+  #side_nav.active {
+    margin-left: 0;
+  }
 }
