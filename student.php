@@ -48,6 +48,9 @@ if (isset($_REQUEST['del'])) {
 
 $get = "SELECT * FROM `students`";
 $result = mysqli_query($conn, $get);
+
+$course = "SELECT * FROM `course`";
+$res = mysqli_query($conn, $course);
 ?>
 
 <div class="container-fluid mt-4">
@@ -151,9 +154,13 @@ $result = mysqli_query($conn, $get);
                                     <label for="course" class="form-label text-primary">Course</label>
                                     <select class="form-select" required name="course" id="course" aria-label="Default select example">
                                         <option selected>Select Course</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <?php
+                                        while ($row = mysqli_fetch_assoc($res)) {
+                                        ?>
+                                            <option value="<?= $row['course_name'] ?>"><?= $row['course_name'] ?></option>
+                                        <?php
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                                 <div class="col-md-4 col-12">

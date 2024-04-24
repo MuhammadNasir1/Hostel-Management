@@ -23,9 +23,9 @@
       <ul class="list-unstyled px-2">
         <li class="active"><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-home"></i> Dashboard</a></li>
         <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-home"></i> Fees</a></li>
-        <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-home"></i> Students</a></li>
-        <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-envelope-open-text"></i> Courses</a></li>
-        <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-users"></i>
+        <li class=""><a href="./student.php" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-home"></i> Students</a></li>
+        <li class=""><a href="./course.php" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-envelope-open-text"></i> Courses</a></li>
+        <li class=""><a href="./rooms.php" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-users"></i>
             Rooms</a></li>
       </ul>
       <hr class="h-color mx-2">
