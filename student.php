@@ -4,11 +4,12 @@ if (@!$_SESSION['login']) {
     header("Location: login.php");
 }
 
-$title = "STUDENT";
+$title = "Student";
 include("./includes/header.php");
 
 
 if (isset($_POST['save'])) {
+    $id = $_POST['updateID'];
     $name = $_POST['name'];
     $roll_no = $_POST['roll_no'];
     $father_name = $_POST['father_name'];
@@ -22,15 +23,24 @@ if (isset($_POST['save'])) {
     $status = $_POST['status'];
     $address = $_POST['address'];
 
-    $insert = "INSERT INTO `students`(`name`, `roll_no`, `father_name`, `mother_name`, `contact_no`, `date_of_birth`, `parent_no`, `course`, `gender`, `blood_group`, `status`, `address`) VALUES ('$name','$roll_no','$father_name','$mother_name','$contact_no','$date_of_birth','$parent_no','$course','$gender','$blood_group','$status','$address')";
-    $query = mysqli_query($conn, $insert);
 
-    if ($query) {
-        echo 'Data Added';
 
-        header('location: student.php');
+    if (empty($id)) {
+        $insert = "INSERT INTO `students`(`name`, `roll_no`, `father_name`, `mother_name`, `contact_no`, `date_of_birth`, `parent_no`, `course`, `gender`, `blood_group`, `status`, `address`) VALUES ('$name','$roll_no','$father_name','$mother_name','$contact_no','$date_of_birth','$parent_no','$course','$gender','$blood_group','$status','$address')";
+        $query = mysqli_query($conn, $insert);
+        if ($query) {
+            echo 'Data Added';
+
+            header('location: student.php');
+        }
     } else {
-        echo 'Data Not Added';
+        $update = "UPDATE `students` SET `name`='$name',`roll_no`='$roll_no',`father_name`='$father_name',`mother_name`='$mother_name',`contact_no`='$contact_no',`date_of_birth`='$date_of_birth',`parent_no`='$parent_no',`course`='$course',`gender`='$gender',`blood_group`='$blood_group',`status`='$status',`address`='$address' WHERE id = $id";
+        $updateQuery = mysqli_query($conn, $update);
+        if ($updateQuery) {
+            echo 'Data Added';
+
+            header('location: student.php');
+        }
     }
 }
 
@@ -62,8 +72,8 @@ if (isset($_REQUEST['edit'])) {
 <?php
     $id = $_REQUEST['edit'];
     $sql = "SELECT * FROM `students` WHERE id = $id";
-    $res = mysqli_query($conn, $sql);
-    $updateData  = mysqli_fetch_assoc($res);
+    $result = mysqli_query($conn, $sql);
+    $updateData  = mysqli_fetch_assoc($result);
 }
 ?>
 
@@ -127,34 +137,34 @@ if (isset($_REQUEST['edit'])) {
                     <div class="container">
 
                         <form action="#" method="post" class="form">
-                            <input type="text" name="updateID" value="<?= $updateData['id'] ?>">
+                            <input type="hidden" name="updateID" value="<?= @$updateData['id'] ?>">
                             <div class="row">
                                 <div class="col-md-4 col-12">
                                     <label for="name" class="form-label text-primary">Name</label>
-                                    <input type="text" placeholder="Enter Name" required name="name" id="name" class="form-control" value="<?= $updateData['name'] ?>">
+                                    <input type="text" placeholder="Enter Name" required name="name" id="name" class="form-control" value="<?= @$updateData['name'] ?>">
                                 </div>
                                 <div class="col-md-4 col-12 mt-md-0 mt-3">
                                     <label for="roll_no" class="form-label text-primary">Roll No</label>
-                                    <input type="number" min="0" placeholder="Enter Roll No" required name="roll_no" id="roll_no" class="form-control" value="<?= $updateData['roll_no'] ?>">
+                                    <input type="number" min="0" placeholder="Enter Roll No" required name="roll_no" id="roll_no" class="form-control" value="<?= @$updateData['roll_no'] ?>">
                                 </div>
                                 <div class="col-md-4 col-12">
                                     <label for="father_name" class="form-label text-primary">Father Name</label>
-                                    <input type="text" placeholder="Enter Father Name" required name="father_name" id="father_name" class="form-control" value="<?= $updateData['father_name'] ?>">
+                                    <input type="text" placeholder="Enter Father Name" required name="father_name" id="father_name" class="form-control" value="<?= @$updateData['father_name'] ?>">
                                 </div>
                             </div>
 
                             <div class="row mt-3 ">
                                 <div class="col-md-4 col-12 mt-md-0 mt-3">
                                     <label for="mother_name" class="form-label text-primary">Mother Name</label>
-                                    <input type="text" placeholder="Enter Mother Name" required name="mother_name" id="mother_name" class="form-control" value="<?= $updateData['mother_name'] ?>">
+                                    <input type="text" placeholder="Enter Mother Name" required name="mother_name" id="mother_name" class="form-control" value="<?= @$updateData['mother_name'] ?>">
                                 </div>
                                 <div class="col-md-4 col-12">
                                     <label for="contact_no" class="form-label text-primary">Contact No</label>
-                                    <input type="number" min="0" placeholder="Enter Contact No" required name="contact_no" id="contact_no" class="form-control" value="<?= $updateData['contact_no'] ?>">
+                                    <input type="number" min="0" placeholder="Enter Contact No" required name="contact_no" id="contact_no" class="form-control" value="<?= @$updateData['contact_no'] ?>">
                                 </div>
                                 <div class="col-md-4 col-12 mt-md-0 mt-3">
                                     <label for="date_of_birth" class="form-label text-primary">Date Of Birth</label>
-                                    <input type="date" name="date_of_birth" id="date_of_birth" required class="form-control" value="<?= $updateData['date_of_birth'] ?>">
+                                    <input type="date" name="date_of_birth" id="date_of_birth" required class="form-control" value="<?= @$updateData['date_of_birth'] ?>">
                                 </div>
                             </div>
 
@@ -162,28 +172,28 @@ if (isset($_REQUEST['edit'])) {
                             <div class="row mt-3 ">
                                 <div class="col-md-4 col-12">
                                     <label for="parent_no" class="form-label text-primary">Parent No</label>
-                                    <input type="number" min="0" required placeholder="Enter Parent No" name="parent_no" id="parent_no" class="form-control" value="<?= $updateData['parent_no'] ?>">
+                                    <input type="number" min="0" required placeholder="Enter Parent No" name="parent_no" id="parent_no" class="form-control" value="<?= @$updateData['parent_no'] ?>">
                                 </div>
                                 <div class="col-md-4 col-12 mt-md-0 mt-3">
                                     <label for="course" class="form-label text-primary">Course</label>
-                                    <select class="form-select" required name="course" id="course" aria-label="Default select example" ">
+                                    <select class="form-select" required name="course" id="course" aria-label="Default select example">
                                         <option selected>Select Course</option>
                                         <?php
                                         while ($row = mysqli_fetch_assoc($res)) {
                                         ?>
-                                            <option <?= ($updateData['course'] == $row['course_name']) ? 'selected' : ''; ?> value=" <?= $row['course_name'] ?>"><?= $row['course_name'] ?></option>
-                                    <?php
+                                            <option <?= (@$updateData['course'] == $row['course_name']) ? 'selected' : ''; ?> value="<?= $row['course_name'] ?>"><?= $row['course_name'] ?></option>
+                                        <?php
                                         }
-                                    ?>
+                                        ?>
                                     </select>
                                 </div>
                                 <div class="col-md-4 col-12">
                                     <label for="gender" class="form-label text-primary">Gender</label>
                                     <select class="form-select" name="gender" required id="gender" aria-label="Default select example">
                                         <option>Select Gender</option>
-                                        <option <?= ($updateData['gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
-                                        <option <?= ($updateData['gender'] == 'Female') ? 'selected' : ''; ?>>Female</option>
-                                        <option <?= ($updateData['gender'] == 'others') ? 'selected' : ''; ?>>others</option>
+                                        <option <?= (@$updateData['gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
+                                        <option <?= (@$updateData['gender'] == 'Female') ? 'selected' : ''; ?>>Female</option>
+                                        <option <?= (@$updateData['gender'] == 'others') ? 'selected' : ''; ?>>others</option>
                                     </select>
                                 </div>
                             </div>
@@ -194,28 +204,28 @@ if (isset($_REQUEST['edit'])) {
                                     <label for="blood_group" class="form-label text-primary">Blood Group</label>
                                     <select class="form-select" required name="blood_group" id="blood_group" aria-label="Default select example">
                                         <option selected>Select Blood Group</option>
-                                        <option <?= ($updateData['blood_group'] == 'A+') ? 'selected' : ''; ?> value="A+">A+</option>
-                                        <option <?= ($updateData['blood_group'] == 'A-') ? 'selected' : ''; ?> value="A-">A-</option>
-                                        <option <?= ($updateData['blood_group'] == 'B+') ? 'selected' : ''; ?> value="B+">B+</option>
-                                        <option <?= ($updateData['blood_group'] == 'B-') ? 'selected' : ''; ?> value="B-">B-</option>
-                                        <option <?= ($updateData['blood_group'] == 'O+') ? 'selected' : ''; ?> value="O+">O+</option>
-                                        <option <?= ($updateData['blood_group'] == 'O-') ? 'selected' : ''; ?> value="O-">O-</option>
-                                        <option <?= ($updateData['blood_group'] == 'AB+') ? 'selected' : ''; ?> value="AB+">AB+</option>
-                                        <option <?= ($updateData['blood_group'] == 'AB-') ? 'selected' : ''; ?> value="AB-">AB-</option>
+                                        <option <?= (@$updateData['blood_group'] == 'A+') ? 'selected' : ''; ?> value="A+">A+</option>
+                                        <option <?= (@$updateData['blood_group'] == 'A-') ? 'selected' : ''; ?> value="A-">A-</option>
+                                        <option <?= (@$updateData['blood_group'] == 'B+') ? 'selected' : ''; ?> value="B+">B+</option>
+                                        <option <?= (@$updateData['blood_group'] == 'B-') ? 'selected' : ''; ?> value="B-">B-</option>
+                                        <option <?= (@$updateData['blood_group'] == 'O+') ? 'selected' : ''; ?> value="O+">O+</option>
+                                        <option <?= (@$updateData['blood_group'] == 'O-') ? 'selected' : ''; ?> value="O-">O-</option>
+                                        <option <?= (@$updateData['blood_group'] == 'AB+') ? 'selected' : ''; ?> value="AB+">AB+</option>
+                                        <option <?= (@$updateData['blood_group'] == 'AB-') ? 'selected' : ''; ?> value="AB-">AB-</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 col-12 mt-md-0 mt-3">
                                     <label for="status" class="form-label text-primary">Status</label>
                                     <select class="form-select" required name="status" id="status" aria-label="Default select example">
                                         <option selected>Select Status</option>
-                                        <option <?= ($updateData['status'] == 'Active') ? 'selected' : ''; ?> value="">Active</option>
-                                        <option <?= ($updateData['status'] == 'InActive') ? 'selected' : ''; ?> value="">InActive</option>
+                                        <option <?= (@$updateData['status'] == 'Active') ? 'selected' : ''; ?> value="Active">Active</option>
+                                        <option <?= (@$updateData['status'] == 'InActive') ? 'selected' : ''; ?> value="InActive">InActive</option>
                                     </select>
                                 </div>
                                 <div class="row mt-3 pe-0">
                                     <div class="col-12 pe-0">
                                         <label for="address" class="form-label text-primary">Address</label>
-                                        <textarea placeholder="Enter Your Address" required name="address" id="address" rows="3" class="form-control"><?= $row['address'] ?></textarea>
+                                        <textarea placeholder="Enter Your Address" required name="address" id="address" rows="3" class="form-control"><?= @$updateData['address'] ?></textarea>
                                     </div>
                                 </div>
 

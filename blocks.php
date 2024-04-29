@@ -4,23 +4,29 @@ if (@!$_SESSION['login']) {
     header("Location: login.php");
 }
 
-$title = "Couses";
+$title = "Block";
 include("./includes/header.php");
 
 
 if (isset($_POST['submit'])) {
+    $id = $_POST['updateID'];
     $block_name = $_POST['block_name'];
     $gender = $_POST['gender'];
     $block_status = $_POST['block_status'];
     $block_description = $_POST['block_description'];
 
-    $insert = "INSERT INTO `blocks`(`block_name`, `gender`, `block_status`, `block_descriptipn`) VALUES ('$block_name','$gender','$block_status','$block_description')";
-    $query = mysqli_query($conn, $insert);
-
-    if ($insert) {
-        header('location: blocks.php');
+    if (empty($id)) {
+        $insert = "INSERT INTO `blocks`(`block_name`, `gender`, `block_status`, `block_descriptipn`) VALUES ('$block_name','$gender','$block_status','$block_description')";
+        $query = mysqli_query($conn, $insert);
+        if ($insert) {
+            header('location: blocks.php');
+        }
     } else {
-        echo "Data Not Added";
+        $update = "UPDATE `blocks` SET `block_name`='$block_name',`gender`='$gender',`block_status`='$block_status',`block_descriptipn`='$block_description' WHERE id = $id";
+        $updateQuery = mysqli_query($conn, $update);
+        if ($updateQuery) {
+            header('location: blocks.php');
+        }
     }
 }
 
@@ -39,6 +45,20 @@ if (isset($_REQUEST['del'])) {
     }
 }
 
+
+if (isset($_REQUEST['edit'])) {
+?>
+    <script>
+        $(document).ready(function() {
+            $('#exampleModal').modal('show');
+        });
+    </script>
+<?php
+    $id = $_REQUEST['edit'];
+    $sql = "SELECT * FROM `blocks` WHERE id = $id";
+    $res = mysqli_query($conn, $sql);
+    $updateData  = mysqli_fetch_assoc($res);
+}
 ?>
 
 <div class="container-fluid mt-4">
@@ -97,24 +117,25 @@ if (isset($_REQUEST['del'])) {
             <div class="modal-body">
                 <div class="container-fluid">
                     <form action="#" method="post" class="form">
+                        <input type="hidden" name="updateID" value="<?= @$updateData['id'] ?>">
                         <div class="row">
                             <div class="col-md-4 col-12">
                                 <label for="block_name" class="form-label text-primary">Block Name</label>
-                                <input type="text" name="block_name" required placeholder="Enter Block Name" id="block_name" class="form-control">
+                                <input type="text" name="block_name" required placeholder="Enter Block Name" id="block_name" class="form-control" value="<?= @$updateData['block_name'] ?>">
                             </div>
                             <div class="col-md-4 col-12">
                                 <label for="gender" class="form-label text-primary">Gender</label>
                                 <select name="gender" id="gender" class="form-select">
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="others">others</option>
+                                    <option <?= (@$updateData['gender'] == 'Male') ? 'selected' : ''; ?> value="Male">Male</option>
+                                    <option <?= (@$updateData['gender'] == 'Female') ? 'selected' : ''; ?> value="Female">Female</option>
+                                    <option <?= (@$updateData['gender'] == 'others') ? 'selected' : ''; ?> value="others">others</option>
                                 </select>
                             </div>
                             <div class="col-md-4 col-12">
                                 <label for="block_status" class="form-label text-primary">Status</label>
                                 <select name="block_status" id="block_status" class="form-select">
-                                    <option value="Active">Active</option>
-                                    <option value="InActive">InActive</option>
+                                    <option <?= (@$updateData['block_status'] == 'Active') ? 'selected' : ''; ?> value="Active">Active</option>
+                                    <option <?= (@$updateData['block_status'] == 'InActive') ? 'selected' : ''; ?> value="InActive">InActive</option>
                                 </select>
                             </div>
                         </div>
@@ -122,13 +143,13 @@ if (isset($_REQUEST['del'])) {
                         <div class="row mt-3 pe-0">
                             <div class="col-12 pe-0">
                                 <label for="block_description" class="form-label text-primary">Description</label>
-                                <textarea placeholder="Enter Block Description" required name="block_description" id="block_description" rows="3" class="form-control"></textarea>
+                                <textarea placeholder="Enter Block Description" required name="block_description" id="block_description" rows="3" class="form-control"><?= @$updateData['block_descriptipn'] ?></textarea>
                             </div>
                         </div>
 
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class=" modal-footer">
                 <button type="submit" name="submit" class="btn bg-primary text-white px-3 py-2 fw-semibold">Save</button>
                 </form>
             </div>

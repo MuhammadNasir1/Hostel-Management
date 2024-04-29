@@ -4,22 +4,29 @@ if (@!$_SESSION['login']) {
     header("Location: login.php");
 }
 
-$title = "Couses";
+$title = "Courses";
 include("./includes/header.php");
 
 
 if (isset($_POST['submit'])) {
+    $id = $_POST['updateID'];
     $course_name = $_POST['course_name'];
     $no_of_year = $_POST['no_of_year'];
     $course_status = $_POST['course_status'];
 
-    $insert = "INSERT INTO `course`(`course_name`, `no_of_year`, `course_status`) VALUES ('$course_name','$no_of_year','$course_status')";
-    $query = mysqli_query($conn, $insert);
-
-    if ($insert) {
-        header('location: course.php');
+    if (empty($id)) {
+        $insert = "INSERT INTO `course`(`course_name`, `no_of_year`, `course_status`) VALUES ('$course_name','$no_of_year','$course_status')";
+        $query = mysqli_query($conn, $insert);
+        if ($insert) {
+            header('location: course.php');
+        }
     } else {
-        echo "Data Not Added";
+        $update = "UPDATE `course` SET `course_name`='$course_name',`no_of_year`='$no_of_year',`course_status`='$course_status' WHERE id = $id";
+        $updateQuery = mysqli_query($conn, $update);
+
+        if ($updateQuery) {
+            header('location: course.php');
+        }
     }
 }
 
@@ -36,6 +43,20 @@ if (isset($_REQUEST['del'])) {
     } else {
         echo 'Data Not Added';
     }
+}
+
+if (isset($_REQUEST['edit'])) {
+?>
+    <script>
+        $(document).ready(function() {
+            $('#exampleModal').modal('show');
+        });
+    </script>
+<?php
+    $id = $_REQUEST['edit'];
+    $sql = "SELECT * FROM `course` WHERE id = $id";
+    $res = mysqli_query($conn, $sql);
+    $updateData  = mysqli_fetch_assoc($res);
 }
 
 ?>
@@ -96,20 +117,21 @@ if (isset($_REQUEST['del'])) {
             <div class="modal-body">
                 <div class="container-fluid">
                     <form action="#" method="post" class="form">
+                        <input type="hidden" name="updateID" value="<?= @$updateData['id'] ?>">
                         <div class="row">
                             <div class="col-md-4 col-12">
                                 <label for="course_name" class="form-label text-primary">Course Name</label>
-                                <input type="text" name="course_name" placeholder="Enter Course Name" id="course_name" class="form-control">
+                                <input type="text" name="course_name" placeholder="Enter Course Name" id="course_name" class="form-control" value="<?= @$updateData['course_name'] ?>">
                             </div>
                             <div class="col-md-4 col-12">
                                 <label for="no_of_year" class="form-label text-primary">No Of Year</label>
-                                <input type="number" min="1" name="no_of_year" id="no_of_year" placeholder="No Of Year" class="form-control">
+                                <input type="number" min="1" name="no_of_year" id="no_of_year" placeholder="No Of Year" class="form-control" value="<?= @$updateData['no_of_year'] ?>">
                             </div>
                             <div class="col-md-4 col-12">
                                 <label for="course_status" class="form-label text-primary">Status</label>
                                 <select name="course_status" id="course_status" class="form-select">
-                                    <option value="Active">Active</option>
-                                    <option value="InActive">InActive</option>
+                                    <option <?= (@$updateData['course_status'] == 'Active') ? 'selected' : ''; ?> value="Active">Active</option>
+                                    <option <?= (@$updateData['course_status'] == 'InActive') ? 'selected' : ''; ?> value="InActive">InActive</option>
                                 </select>
                             </div>
                         </div>

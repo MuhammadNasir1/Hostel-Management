@@ -4,24 +4,30 @@ if (@!$_SESSION['login']) {
     header("Location: login.php");
 }
 
-$title = "Couses";
+$title = "Rooms";
 include("./includes/header.php");
 
 
 if (isset($_POST['submit'])) {
+    $id = $_POST['updateID'];
     $block = $_POST['block'];
     $no_of_beds = $_POST['no_of_beds'];
     $room_status = $_POST['room_status'];
     $room_no = $_POST['room_no'];
     $room_description = $_POST['room_description'];
 
-    $insert = "INSERT INTO `rooms`(`block`, `no_of_beds`, `room_status`, `room_no`, `room_description`) VALUES ('$block','$no_of_beds','$room_status','$room_no','$room_description')";
-    $query = mysqli_query($conn, $insert);
-
-    if ($insert) {
-        header('location: rooms.php');
+    if (empty($id)) {
+        $insert = "INSERT INTO `rooms`(`block`, `no_of_beds`, `room_status`, `room_no`, `room_description`) VALUES ('$block','$no_of_beds','$room_status','$room_no','$room_description')";
+        $query = mysqli_query($conn, $insert);
+        if ($insert) {
+            header('location: rooms.php');
+        }
     } else {
-        echo "Data Not Added";
+        $update = "UPDATE `rooms` SET `block`='$block',`no_of_beds`='$no_of_beds',`room_status`='$room_status',`room_no`='$room_no',`room_description`='$room_description' WHERE id = $id";
+        $updateQuery = mysqli_query($conn, $update);
+        if ($updateQuery) {
+            header('location: rooms.php');
+        }
     }
 }
 
@@ -41,6 +47,20 @@ if (isset($_REQUEST['del'])) {
     } else {
         echo 'Data Not Added';
     }
+}
+
+if (isset($_REQUEST['edit'])) {
+?>
+    <script>
+        $(document).ready(function() {
+            $('#exampleModal').modal('show');
+        });
+    </script>
+<?php
+    $id = $_REQUEST['edit'];
+    $sql = "SELECT * FROM `rooms` WHERE id = $id";
+    $resu = mysqli_query($conn, $sql);
+    $updateData  = mysqli_fetch_assoc($resu);
 }
 
 ?>
@@ -103,6 +123,7 @@ if (isset($_REQUEST['del'])) {
             <div class="modal-body">
                 <div class="container-fluid">
                     <form action="#" method="post" class="form">
+                        <input type="hidden" name="updateID" value="<?= @$updateData['id'] ?>">
                         <div class="row">
                             <div class="col-md-6 col-12">
                                 <label for="block" class="form-label text-primary">Block</label>
@@ -110,7 +131,7 @@ if (isset($_REQUEST['del'])) {
                                     <?php
                                     while ($row = mysqli_fetch_assoc($res)) {
                                     ?>
-                                        <option value="<?= $row['block_name'] ?>"><?= $row['block_name'] ?></option>
+                                        <option <?= (@$updateData['block'] == $row['block_name']) ? 'selected' : ''; ?> value="<?= $row['block_name'] ?>"><?= $row['block_name'] ?></option>
                                     <?php
                                     }
                                     ?>
@@ -119,9 +140,9 @@ if (isset($_REQUEST['del'])) {
                             <div class="col-md-6 col-12">
                                 <label for="no_of_beds" class="form-label text-primary">No Of Beds</label>
                                 <select name="no_of_beds" id="no_of_beds" class="form-select">
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option <?= (@$updateData['no_of_beds'] == '1') ? 'selected' : ''; ?> value="1">One</option>
+                                    <option <?= (@$updateData['no_of_beds'] == '2') ? 'selected' : ''; ?> value="2">Two</option>
+                                    <option <?= (@$updateData['no_of_beds'] == '3') ? 'selected' : ''; ?> value="3">Three</option>
                                 </select>
                             </div>
 
@@ -131,13 +152,13 @@ if (isset($_REQUEST['del'])) {
                             <div class="col-md-6 col-12">
                                 <label for="room_status" class="form-label text-primary">Status</label>
                                 <select name="room_status" id="room_status" class="form-select">
-                                    <option value="Active">Active</option>
-                                    <option value="InActive">InActive</option>
+                                    <option <?= (@$updateData['room_status'] == 'Active') ? 'selected' : ''; ?> value="Active">Active</option>
+                                    <option <?= (@$updateData['room_status'] == 'InActive') ? 'selected' : ''; ?> value="InActive">InActive</option>
                                 </select>
                             </div>
                             <div class="col-md-6 col-12">
                                 <label for="room_no" class="form-label text-primary">Room No</label>
-                                <input type="number" min="0" required name="room_no" id="room_no" class="form-control" placeholder="Enter Room No">
+                                <input type="number" min="0" required name="room_no" id="room_no" class="form-control" placeholder="Enter Room No" value="<?= @$updateData['room_no'] ?>">
                             </div>
 
                         </div>
@@ -145,7 +166,7 @@ if (isset($_REQUEST['del'])) {
                         <div class="row mt-3 pe-0">
                             <div class="col-12 pe-0">
                                 <label for="room_description" class="form-label text-primary">Description</label>
-                                <textarea placeholder="Enter Room Description" required name="room_description" id="room_description" rows="3" class="form-control"></textarea>
+                                <textarea placeholder="Enter Room Description" required name="room_description" id="room_description" rows="3" class="form-control"><?= @$updateData['room_description'] ?></textarea>
                             </div>
                         </div>
 
