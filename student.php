@@ -51,6 +51,17 @@ $result = mysqli_query($conn, $get);
 
 $course = "SELECT * FROM `course`";
 $res = mysqli_query($conn, $course);
+
+if (isset($_REQUEST['edit'])) {
+
+?>
+
+<?php
+    $id = $_REQUEST['edit'];
+    $sql = "SELECT * FROM `students` WHERE id = $id";
+    $res = mysqli_query($conn, $sql);
+    $updateData  = mysqli_fetch_assoc($res);
+}
 ?>
 
 <div class="container-fluid mt-4">
@@ -113,7 +124,7 @@ $res = mysqli_query($conn, $course);
                     <div class="container">
 
                         <form action="#" method="post" class="form">
-
+                            <input type="text" name="updateID" value="<?= $updateData['id'] ?>">
                             <div class="row">
                                 <div class="col-md-4 col-12">
                                     <label for="name" class="form-label text-primary">Name</label>
@@ -221,3 +232,6 @@ $res = mysqli_query($conn, $course);
 <?php
 include("./includes/footer.php")
 ?>
+<script>
+    $('#exampleModal').modal('show');
+</script>
