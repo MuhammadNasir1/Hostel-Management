@@ -7,7 +7,6 @@
 }
 
 :root {
-  /* --primary-color: #f44336; */
   --primary-color: #0d2d64;
   --secondary-color: #000;
   --light-color: #000;
@@ -22,7 +21,6 @@
   background-color: var(--primary-color) !important;
 }
 .form-control{
-  /* border:  1px solid var(--primary-color); */
   border-color: rgb(199, 195, 195);
 }
 .form-control:focus{
@@ -123,15 +121,7 @@ hr.h-color {
   background: #eee;
 }
 
-.sidebar li.active {
-  background: #eee;
-  border-radius: 8px;
-}
 
-.sidebar li.active a,
-.sidebar li.active a:hover {
-  color: #000;
-}
 
 .sidebar li a {
   color: #fff;
@@ -143,8 +133,5 @@ hr.h-color {
     position: absolute;
     min-height: 100vh;
     z-index: 1;
-  }
-  #side_nav.active {
-    margin-left: 0;
   }
 }

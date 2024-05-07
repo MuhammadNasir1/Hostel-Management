@@ -72,8 +72,8 @@ if (isset($_REQUEST['edit'])) {
 <?php
     $id = $_REQUEST['edit'];
     $sql = "SELECT * FROM `students` WHERE id = $id";
-    $result = mysqli_query($conn, $sql);
-    $updateData  = mysqli_fetch_assoc($result);
+    $res = mysqli_query($conn, $sql);
+    $updateData  = mysqli_fetch_assoc($res);
 }
 ?>
 
