@@ -15,7 +15,7 @@
 <body>
 
   <div class="main-container d-flex">
-    <div class="sidebar" id="side_nav">
+    <div class="sidebar " id="side_nav">
       <div class="header-box px-2 pt-3 pb-4 d-flex justify-content-between">
         <h1 class="fs-4"><span class="text-white">HMS</span></h1>
         <button class="btn d-md-none d-block close-btn px-1 py-0 text-white"><i class="fal fa-stream"></i></button>
@@ -41,17 +41,4 @@
 
     </div>
     <div class="content">
-      <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <div class="container-fluid">
-          <div class="d-flex justify-content-between d-md-none d-block">
-            <button class="btn px-1 py-0 open-btn me-2"><i class="fal fa-stream"></i></button>
-            <a class="navbar-brand fs-4" href="#"><span class="bg-dark rounded px-2 py-0 text-white">HMS</span></a>
-
-          </div>
-          <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fal fa-bars"></i>
-          </button>
-        </div>
-      </nav>
-
       <div class="dashboard-content px-3 pt-4">
