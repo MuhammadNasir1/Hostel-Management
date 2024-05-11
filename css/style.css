@@ -20,10 +20,10 @@
 .bg-primary {
   background-color: var(--primary-color) !important;
 }
-.form-control{
+.form-control {
   border-color: rgb(199, 195, 195);
 }
-.form-control:focus{
+.form-control:focus {
   border-color: var(--primary-color);
   box-shadow: none;
 }
@@ -121,8 +121,6 @@ hr.h-color {
   background: #eee;
 }
 
-
-
 .sidebar li a {
   color: #fff;
 }
@@ -133,5 +131,76 @@ hr.h-color {
     position: absolute;
     min-height: 100vh;
     z-index: 1;
+  }
+}
+
+/* Dashboard */
+.dashboard-heading h1 {
+  padding-left: 60px;
+  font-size: 2rem;
+}
+.dashboard .box {
+  height: 6rem;
+  width: 16rem;
+  border-radius: 1rem;
+  border: 2px solid #07142b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dashboard .box i {
+  font-size: 35px;
+  color: #07142b;
+}
+.dashboard .box .number {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+@media (min-width: 1572px) and (max-width: 1590px) {
+  .dashboard-heading h1 {
+    padding-left: 50px;
+  }
+}
+@media (min-width: 1542px) and (max-width: 1572px) {
+  .dashboard-heading h1 {
+    padding-left: 35px;
+  }
+}
+@media (min-width: 1491px) and (max-width: 1542px) {
+  .dashboard-heading h1 {
+    padding-left: 28px;
+  }
+}
+@media (min-width: 0px) and (max-width: 1491px) {
+  .dashboard-heading h1 {
+    text-align: center;
+    padding-left: 0px;
+  }
+}
+@media (min-width: 445px) and (max-width: 932px) {
+  .dashboard .box {
+    height: 5rem;
+    width: 12.5rem;
+    border-radius: 1rem;
+  }
+}
+@media (min-width: 0px) and (max-width: 445px) {
+  .dashboard .box {
+    height: 5rem;
+    width: 8rem;
+    border-radius: 0.5rem;
+  }
+  .dashboard .box i {
+    font-size: 25px;
+    color: #07142b;
+  }
+  .dashboard .box .number {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .card-heading {
+    font-size: 15px;
+    text-align: center;
   }
 }
