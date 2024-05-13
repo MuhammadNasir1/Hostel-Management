@@ -6,6 +6,32 @@ if (@!$_SESSION['login']) {
 
 $title = "Dashboard";
 include("./includes/header.php");
+
+//Doctors Data
+
+$studentsData = "SELECT * FROM `students`";
+$studentsQuery = mysqli_query($conn, $studentsData);
+$studentsCount = mysqli_num_rows($studentsQuery);
+if ($studentsCount < 10) {
+    $studentsCount = "0" . $studentsCount;
+}
+//Rooms Data
+
+$roomsData = "SELECT * FROM `rooms`";
+$roomsQuery = mysqli_query($conn, $roomsData);
+$roomsCount = mysqli_num_rows($roomsQuery);
+if ($roomsCount < 10) {
+    $roomsCount = "0" . $roomsCount;
+}
+
+//Employes Data
+
+$employesData = "SELECT * FROM `employes`";
+$roomsQuery = mysqli_query($conn, $employesData);
+$employesCount = mysqli_num_rows($roomsQuery);
+if ($employesCount < 10) {
+    $employesCount = "0" . $employesCount;
+}
 ?>
 
 <div class="container dashboard-heading">
@@ -15,7 +41,7 @@ include("./includes/header.php");
     <div class="box">
         <div class="d-flex align-items-center flex-column ps-2">
             <div class="card-heading">Total Students</div>
-            <div class="number">03</div>
+            <div class="number"><?= $studentsCount ?></div>
         </div>
         <div class="mx-auto">
             <i class="fa-solid fa-graduation-cap"></i>
@@ -23,8 +49,8 @@ include("./includes/header.php");
     </div>
     <div class="box">
         <div class="d-flex align-items-center flex-column ps-2">
-            <div class="card-heading">Total Nurses</div>
-            <div class="number">03</div>
+            <div class="card-heading">Total Rooms</div>
+            <div class="number"><?= $roomsCount ?></div>
         </div>
         <div class="mx-auto">
             <i class="fa-solid fa-bed-pulse"></i>
@@ -33,7 +59,7 @@ include("./includes/header.php");
     <div class="box">
         <div class="d-flex align-items-center flex-column ps-2">
             <div class="card-heading">Total Employes</div>
-            <div class="number">03</div>
+            <div class="number"><?= $employesCount ?></div>
         </div>
         <div class="mx-auto">
             <i class="fa-solid fa-users-line"></i>
