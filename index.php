@@ -7,31 +7,22 @@ if (@!$_SESSION['login']) {
 $title = "Dashboard";
 include("./includes/header.php");
 
-//Doctors Data
-
-$studentsData = "SELECT * FROM `students`";
-$studentsQuery = mysqli_query($conn, $studentsData);
-$studentsCount = mysqli_num_rows($studentsQuery);
-if ($studentsCount < 10) {
-    $studentsCount = "0" . $studentsCount;
-}
-//Rooms Data
-
-$roomsData = "SELECT * FROM `rooms`";
-$roomsQuery = mysqli_query($conn, $roomsData);
-$roomsCount = mysqli_num_rows($roomsQuery);
-if ($roomsCount < 10) {
-    $roomsCount = "0" . $roomsCount;
+function fetchDataAndCount($conn, $table)
+{
+    $query = "SELECT * FROM `$table`";
+    $result = mysqli_query($conn, $query);
+    $count = mysqli_num_rows($result);
+    return ($count < 10) ? "0$count" : "$count";
 }
 
-//Employes Data
+// Students Data
+$studentsCount = fetchDataAndCount($conn, 'students');
 
-$employesData = "SELECT * FROM `employes`";
-$roomsQuery = mysqli_query($conn, $employesData);
-$employesCount = mysqli_num_rows($roomsQuery);
-if ($employesCount < 10) {
-    $employesCount = "0" . $employesCount;
-}
+// Rooms Data
+$roomsCount = fetchDataAndCount($conn, 'rooms');
+
+// Employes Data
+$employesCount = fetchDataAndCount($conn, 'employes');
 ?>
 
 <div class="container dashboard-heading">
