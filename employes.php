@@ -18,11 +18,12 @@ if (isset($_POST['submit'])) {
     $emp_gender = $_POST['emp_gender'];
     $emp_dob = $_POST['emp_dob'];
     $emp_doj = $_POST['emp_doj'];
+    $emp_username = $_POST['emp_username'];
 
     if (empty($id)) {
-        $insert = "INSERT INTO `employes`(`emp_email`, `block_id`, `emp_type`, `emp_name`, `gender`, `date_of_birth`, `date_of_join`) VALUES ('$email_id','$block_id','$emp_type','$emp_name','$emp_gender','$emp_dob','$emp_doj')";
+        $insert = "INSERT INTO `employes`(`emp_email`, `block_id`, `emp_type`, `emp_name`, `gender`, `date_of_birth`, `date_of_join`, `emp_username`) VALUES ('$email_id','$block_id','$emp_type','$emp_name','$emp_gender','$emp_dob','$emp_doj','$emp_username')";
 
-        $user = "INSERT INTO `users`(`user_name`, `email`, `password`, `role`) VALUES ('$emp_name','$email_id','$emp_password','employe')";
+        $user = "INSERT INTO `users`(`user_name`, `email`, `password`, `role`) VALUES ('$emp_username','$email_id','$emp_password','employe')";
 
         $query = mysqli_query($conn, $user);
         $query = mysqli_query($conn, $insert);
@@ -143,42 +144,7 @@ if (isset($_REQUEST['edit'])) {
                 <div class="container-fluid">
                     <form action="#" method="post" class="form">
                         <input type="hidden" name="updateID" value="<?= @$updateData['id'] ?>">
-                        <div class="row">
-                            <?php
-                            if (empty($id)) {
-                            ?>
-                                <div class="col-lg-4">
-                                    <label for="email_id" class="form-label text-primary">Email</label>
-                                    <input type="email" name="email_id" placeholder="Enter Email Address" id="email_id" class="form-control" value="<?= @$updateData['emp_email'] ?>">
-                                </div>
-                                <div class="col-lg-4 mt-lg-0 mt-3">
-                                    <label for="emp_password" class="form-label text-primary">Login Password</label>
-                                    <input type="password" name="emp_password" placeholder="Enter Login Password" id="emp_password" class="form-control">
-                                </div>
 
-                            <?php
-
-                            }
-                            ?>
-                            <div class="<?php if (empty($id)) {
-                                        ?>
-                                col-lg-4
-                                <?php
-
-
-                                        } ?>col-12 mt-lg-0 mt-3">
-                                <label for="block_id" class="form-label text-primary">Block</label>
-                                <select name="block_id" id="block_id" class="form-select">
-                                    <?php
-                                    while ($row = mysqli_fetch_assoc($res)) {
-                                    ?>
-                                        <option value="<?= $row['block_name'] ?>"><?= $row['block_name'] ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
 
                         <div class="row mt-3">
 
@@ -190,8 +156,23 @@ if (isset($_REQUEST['edit'])) {
                                 <label for="emp_name" class="form-label text-primary">Employe Name</label>
                                 <input type="text" name="emp_name" placeholder="Enter Employe Name" id="emp_name" class="form-control" value="<?= @$updateData['emp_name'] ?>">
                             </div>
-
                             <div class="col-lg-4 mt-lg-0 mt-3">
+                                <label for="block_id" class="form-label text-primary">Block</label>
+                                <select name="block_id" id="block_id" class="form-select">
+                                    <?php
+                                    while ($row = mysqli_fetch_assoc($res)) {
+                                    ?>
+                                        <option value="<?= $row['block_name'] ?>"><?= $row['block_name'] ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-lg-4">
                                 <label for="emp_gender" class="form-label text-primary">Gender</label>
                                 <select name="emp_gender" id="emp_gender" class="form-select">
 
@@ -201,17 +182,34 @@ if (isset($_REQUEST['edit'])) {
 
                                 </select>
                             </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-lg-6">
+                            <div class="col-lg-4  mt-lg-0 mt-3">
                                 <label for="emp_dob" class="form-label text-primary">Date Of Birth</label>
                                 <input type="date" name="emp_dob" id="emp_dob" class="form-control" value="<?= @$updateData['date_of_birth'] ?>">
                             </div>
-                            <div class="col-lg-6 mt-lg-0 mt-3">
+                            <div class="col-lg-4 mt-lg-0 mt-3">
                                 <label for="emp_doj" class="form-label text-primary">Date Of Joining</label>
                                 <input type="date" name="emp_doj" id="emp_doj" class="form-control" value="<?= @$updateData['date_of_join'] ?>">
                             </div>
+
+                        </div>
+
+                        <div class="row mt-3 <?php if ($id) { ?> d-none <?php } ?>">
+                            <h1 class="modal-title fs-5 fw-bold">Login Credentials</h1>
+
+                            <div class="col-lg-4 ">
+                                <label for="emp_username" class="form-label text-primary">Username</label>
+                                <input type="text" name="emp_username" placeholder="Enter Username" id="emp_username" class="form-control">
+                            </div>
+                            <div class="col-lg-4 mt-lg-0 mt-3">
+                                <label for="email_id" class="form-label text-primary">Email</label>
+                                <input type="email" name="email_id" placeholder="Enter Email Address" id="email_id" class="form-control" value="<?= @$updateData['emp_email'] ?>">
+                            </div>
+                            <div class="col-lg-4 mt-lg-0 mt-3">
+                                <label for="emp_password" class="form-label text-primary">Login Password</label>
+                                <input type="password" name="emp_password" placeholder="Enter Login Password" id="emp_password" class="form-control">
+                            </div>
+
+
 
                         </div>
 

@@ -12,18 +12,18 @@ if (isset($_POST['submit'])) {
     $id = $_POST['updateID'];
     $block = $_POST['block'];
     $no_of_beds = $_POST['no_of_beds'];
-    $room_status = $_POST['room_status'];
+    $room_fee = $_POST['room_fee'];
     $room_no = $_POST['room_no'];
     $room_description = $_POST['room_description'];
 
     if (empty($id)) {
-        $insert = "INSERT INTO `rooms`(`block`, `no_of_beds`, `room_status`, `room_no`, `room_description`) VALUES ('$block','$no_of_beds','$room_status','$room_no','$room_description')";
+        $insert = "INSERT INTO `rooms`(`block`, `no_of_beds`, `room_fee`, `room_no`, `room_description`) VALUES ('$block','$no_of_beds','$room_fee','$room_no','$room_description')";
         $query = mysqli_query($conn, $insert);
         if ($insert) {
             header('location: rooms.php');
         }
     } else {
-        $update = "UPDATE `rooms` SET `block`='$block',`no_of_beds`='$no_of_beds',`room_status`='$room_status',`room_no`='$room_no',`room_description`='$room_description' WHERE id = $id";
+        $update = "UPDATE `rooms` SET `block`='$block',`no_of_beds`='$no_of_beds',`room_fee`='$room_fee',`room_no`='$room_no',`room_description`='$room_description' WHERE id = $id";
         $updateQuery = mysqli_query($conn, $update);
         if ($updateQuery) {
             header('location: rooms.php');
@@ -79,7 +79,7 @@ if (isset($_REQUEST['edit'])) {
                     <th>Room No</th>
                     <th>Block</th>
                     <th>No Of Beds</th>
-                    <th>Status</th>
+                    <th>Fees</th>
                     <th>Action</th>
 
                 </tr>
@@ -95,7 +95,7 @@ if (isset($_REQUEST['edit'])) {
                         <td><?= $row['room_no'] ?></td>
                         <td><?= $row['block'] ?></td>
                         <td><?= $row['no_of_beds'] ?></td>
-                        <td><?= $row['room_status'] ?></td>
+                        <td><?= $row['room_fee'] ?></td>
                         <td>
                             <a href="rooms.php?edit=<?= $row['id'] ?>"><button class="btn bg-primary text-white btn-sm">Edit</button></a>
                             <a href="rooms.php?del=<?= $row['id'] ?>"><button class="btn bg-primary text-white btn-sm">Delete</button></a>
@@ -150,11 +150,8 @@ if (isset($_REQUEST['edit'])) {
 
                         <div class="row mt-3">
                             <div class="col-md-6 col-12">
-                                <label for="room_status" class="form-label text-primary">Status</label>
-                                <select name="room_status" id="room_status" class="form-select">
-                                    <option <?= (@$updateData['room_status'] == 'Active') ? 'selected' : ''; ?> value="Active">Active</option>
-                                    <option <?= (@$updateData['room_status'] == 'InActive') ? 'selected' : ''; ?> value="InActive">InActive</option>
-                                </select>
+                                <label for="room_fee" class="form-label text-primary">Fees</label>
+                                <input type="number" min="0" required name="room_fee" id="room_fee" class="form-control" placeholder="Enter Fee" value="<?= @$updateData['room_fee'] ?>">
                             </div>
                             <div class="col-md-6 col-12">
                                 <label for="room_no" class="form-label text-primary">Room No</label>

@@ -23,13 +23,13 @@ if (isset($_POST['submit'])) {
         $insert = "INSERT INTO `room_registration`(`student_id`, `room_id`, `join_date`, `end_date`, `food_type`, `beverage_type`, `status`) VALUES ('0','0','$join_date','$end_date','$food_type','$beverage_type','$status')";
         $query = mysqli_query($conn, $insert);
         if ($insert) {
-            header('location: room_registration.php');
+            header('location: book-room.php');
         }
     } else {
         $update = "UPDATE `room_registration` SET `student_id`='0',`room_id`='0',`join_date`='$join_date',`end_date`='$end_date',`food_type`='$food_type',`beverage_type`='$beverage_type',`status`='$status' WHERE id = $id";
         $updateQuery = mysqli_query($conn, $update);
         if ($updateQuery) {
-            header('location: room_registration.php');
+            header('location: book-room.php');
         }
     }
 }
@@ -51,7 +51,7 @@ if (isset($_REQUEST['del'])) {
     $query = mysqli_query($conn, $delete);
 
     if ($query) {
-        header('location: room_registration.php');
+        header('location: book-room.php');
     } else {
         echo 'Data Not Added';
     }

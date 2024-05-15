@@ -13,28 +13,30 @@ if (isset($_POST['save'])) {
     $name = $_POST['name'];
     $roll_no = $_POST['roll_no'];
     $father_name = $_POST['father_name'];
-    $mother_name = $_POST['mother_name'];
     $contact_no = $_POST['contact_no'];
-    $date_of_birth = $_POST['date_of_birth'];
-    $parent_no = $_POST['parent_no'];
     $course = $_POST['course'];
     $gender = $_POST['gender'];
-    $blood_group = $_POST['blood_group'];
-    $status = $_POST['status'];
+    $stu_email = $_POST['stu_email'];
+    $stu_password = md5($_POST['stu_password']);
+    $stu_username = $_POST['stu_username'];
     $address = $_POST['address'];
 
 
 
     if (empty($id)) {
-        $insert = "INSERT INTO `students`(`name`, `roll_no`, `father_name`, `mother_name`, `contact_no`, `date_of_birth`, `parent_no`, `course`, `gender`, `blood_group`, `status`, `address`) VALUES ('$name','$roll_no','$father_name','$mother_name','$contact_no','$date_of_birth','$parent_no','$course','$gender','$blood_group','$status','$address')";
+
+        $insert = "INSERT INTO `students`(`name`, `roll_no`, `father_name`, `contact_no`, `course`, `gender`, `stu_email`, `stu_password`, `stu_cpassword`, `address`) VALUES ('$name','$roll_no','$father_name','$contact_no','$course','$gender','$stu_email','$stu_password','$stu_username','$address')";
+
+        $user_insert = "INSERT INTO `users`(`user_name`, `email`, `password`, `role`) VALUES ('$stu_username','$stu_email','$stu_password','Student')";
         $query = mysqli_query($conn, $insert);
-        if ($query) {
+        $query2 = mysqli_query($conn, $user_insert);
+        if ($query && $query2) {
             echo 'Data Added';
 
             header('location: student.php');
         }
     } else {
-        $update = "UPDATE `students` SET `name`='$name',`roll_no`='$roll_no',`father_name`='$father_name',`mother_name`='$mother_name',`contact_no`='$contact_no',`date_of_birth`='$date_of_birth',`parent_no`='$parent_no',`course`='$course',`gender`='$gender',`blood_group`='$blood_group',`status`='$status',`address`='$address' WHERE id = $id";
+        $update = "UPDATE `students` SET `name`='$name',`roll_no`='$roll_no',`father_name`='$father_name',`contact_no`='$contact_no',`course`='$course',`gender`='$gender',`address`='$address' WHERE id = $id";
         $updateQuery = mysqli_query($conn, $update);
         if ($updateQuery) {
             echo 'Data Added';
@@ -60,7 +62,7 @@ $get = "SELECT * FROM `students`";
 $result = mysqli_query($conn, $get);
 
 $course = "SELECT * FROM `course`";
-$res = mysqli_query($conn, $course);
+$re = mysqli_query($conn, $course);
 
 if (isset($_REQUEST['edit'])) {
 ?>
@@ -89,11 +91,10 @@ if (isset($_REQUEST['edit'])) {
                 <tr>
                     <th>Sno.</th>
                     <th>Student Name</th>
+                    <th>Roll No</th>
                     <th>Father Name</th>
                     <th>Course</th>
                     <th>Gender</th>
-                    <th>Dob</th>
-                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -106,11 +107,10 @@ if (isset($_REQUEST['edit'])) {
                     <tr>
                         <td><?= $a ?></td>
                         <td><?= $row['name'] ?> </td>
+                        <td><?= $row['roll_no'] ?></td>
                         <td><?= $row['father_name'] ?></td>
                         <td><?= $row['course'] ?></td>
                         <td><?= $row['gender'] ?></td>
-                        <td><?= $row['date_of_birth'] ?></td>
-                        <td><?= $row['status'] ?></td>
                         <td>
                             <a href="student.php?edit=<?= $row['id'] ?>"><button class="btn bg-primary text-white btn-sm">Edit</button></a>
                             <a href="student.php?del=<?= $row['id'] ?>"><button class="btn bg-primary text-white btn-sm">Delete</button></a>
@@ -154,32 +154,17 @@ if (isset($_REQUEST['edit'])) {
                             </div>
 
                             <div class="row mt-3 ">
-                                <div class="col-md-4 col-12 mt-md-0 mt-3">
-                                    <label for="mother_name" class="form-label text-primary">Mother Name</label>
-                                    <input type="text" placeholder="Enter Mother Name" required name="mother_name" id="mother_name" class="form-control" value="<?= @$updateData['mother_name'] ?>">
-                                </div>
+
                                 <div class="col-md-4 col-12">
                                     <label for="contact_no" class="form-label text-primary">Contact No</label>
                                     <input type="number" min="0" placeholder="Enter Contact No" required name="contact_no" id="contact_no" class="form-control" value="<?= @$updateData['contact_no'] ?>">
-                                </div>
-                                <div class="col-md-4 col-12 mt-md-0 mt-3">
-                                    <label for="date_of_birth" class="form-label text-primary">Date Of Birth</label>
-                                    <input type="date" name="date_of_birth" id="date_of_birth" required class="form-control" value="<?= @$updateData['date_of_birth'] ?>">
-                                </div>
-                            </div>
-
-
-                            <div class="row mt-3 ">
-                                <div class="col-md-4 col-12">
-                                    <label for="parent_no" class="form-label text-primary">Parent No</label>
-                                    <input type="number" min="0" required placeholder="Enter Parent No" name="parent_no" id="parent_no" class="form-control" value="<?= @$updateData['parent_no'] ?>">
                                 </div>
                                 <div class="col-md-4 col-12 mt-md-0 mt-3">
                                     <label for="course" class="form-label text-primary">Course</label>
                                     <select class="form-select" required name="course" id="course" aria-label="Default select example">
                                         <option selected>Select Course</option>
                                         <?php
-                                        while ($row = mysqli_fetch_assoc($res)) {
+                                        while ($row = mysqli_fetch_assoc($re)) {
                                         ?>
                                             <option <?= (@$updateData['course'] == $row['course_name']) ? 'selected' : ''; ?> value="<?= $row['course_name'] ?>"><?= $row['course_name'] ?></option>
                                         <?php
@@ -197,32 +182,8 @@ if (isset($_REQUEST['edit'])) {
                                     </select>
                                 </div>
                             </div>
-
                             <div class="row mt-3 ">
-
-                                <div class="col-md-6 col-12 mt-md-0 mt-3">
-                                    <label for="blood_group" class="form-label text-primary">Blood Group</label>
-                                    <select class="form-select" required name="blood_group" id="blood_group" aria-label="Default select example">
-                                        <option selected>Select Blood Group</option>
-                                        <option <?= (@$updateData['blood_group'] == 'A+') ? 'selected' : ''; ?> value="A+">A+</option>
-                                        <option <?= (@$updateData['blood_group'] == 'A-') ? 'selected' : ''; ?> value="A-">A-</option>
-                                        <option <?= (@$updateData['blood_group'] == 'B+') ? 'selected' : ''; ?> value="B+">B+</option>
-                                        <option <?= (@$updateData['blood_group'] == 'B-') ? 'selected' : ''; ?> value="B-">B-</option>
-                                        <option <?= (@$updateData['blood_group'] == 'O+') ? 'selected' : ''; ?> value="O+">O+</option>
-                                        <option <?= (@$updateData['blood_group'] == 'O-') ? 'selected' : ''; ?> value="O-">O-</option>
-                                        <option <?= (@$updateData['blood_group'] == 'AB+') ? 'selected' : ''; ?> value="AB+">AB+</option>
-                                        <option <?= (@$updateData['blood_group'] == 'AB-') ? 'selected' : ''; ?> value="AB-">AB-</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 col-12 mt-md-0 mt-3">
-                                    <label for="status" class="form-label text-primary">Status</label>
-                                    <select class="form-select" required name="status" id="status" aria-label="Default select example">
-                                        <option selected>Select Status</option>
-                                        <option <?= (@$updateData['status'] == 'Active') ? 'selected' : ''; ?> value="Active">Active</option>
-                                        <option <?= (@$updateData['status'] == 'InActive') ? 'selected' : ''; ?> value="InActive">InActive</option>
-                                    </select>
-                                </div>
-                                <div class="row mt-3 pe-0">
+                                <div class="row  pe-0">
                                     <div class="col-12 pe-0">
                                         <label for="address" class="form-label text-primary">Address</label>
                                         <textarea placeholder="Enter Your Address" required name="address" id="address" rows="3" class="form-control"><?= @$updateData['address'] ?></textarea>
@@ -230,6 +191,28 @@ if (isset($_REQUEST['edit'])) {
                                 </div>
 
                             </div>
+                            <div class="row mt-3 <?php if ($id) { ?> d-none <?php } ?> ">
+                                <h1 class="modal-title fs-5 fw-bold">Login Credentials</h1>
+
+                                <div class="col-lg-4 ">
+                                    <label for="stu_username" class="form-label text-primary">Username</label>
+                                    <input type="text" name="stu_username" placeholder="Enter Username" id="stu_username" class="form-control">
+                                </div>
+
+                                <div class="col-lg-4 mt-lg-0 mt-3">
+                                    <label for="stu_email" class="form-label text-primary">Email</label>
+                                    <input type="email" name="stu_email" placeholder="Enter Email Address" id="stu_email" class="form-control" value="<?= @$updateData['emp_email'] ?>">
+                                </div>
+                                <div class="col-lg-4 mt-lg-0 mt-3">
+                                    <label for="stu_password" class="form-label text-primary">Login Password</label>
+                                    <input type="password" name="stu_password" placeholder="Enter Login Password" id="stu_password" class="form-control">
+                                </div>
+
+
+
+                            </div>
+
+
 
                     </div>
                 </div>

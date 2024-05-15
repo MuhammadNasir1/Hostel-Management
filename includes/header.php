@@ -29,6 +29,8 @@
         <li class=""><a href="./course.php" class="text-decoration-none px-3 py-2 d-block"> Courses</a></li>
         <li class=""><a href="./rooms.php" class="text-decoration-none px-3 py-2 d-block">
             Rooms</a></li>
+        <li class=""><a href="./book-room.php" class="text-decoration-none px-3 py-2 d-block">
+            Book Rooms</a></li>
         <li class=""><a href="./employes.php" class="text-decoration-none px-3 py-2 d-block">
             Employes</a></li>
         <li class=""><a href="./blocks.php" class="text-decoration-none px-3 py-2 d-block">
