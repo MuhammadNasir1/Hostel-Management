@@ -89,13 +89,13 @@ if (isset($_REQUEST['edit'])) {
         <table class="table table-responsive" id="myTable">
             <thead>
                 <tr>
-                    <th>Sno.</th>
-                    <th>Student Name</th>
-                    <th>Roll No</th>
-                    <th>Father Name</th>
-                    <th>Course</th>
-                    <th>Gender</th>
-                    <th>Action</th>
+                    <th class="bg-primary text-white">Sno.</th>
+                    <th class="bg-primary text-white">Student Name</th>
+                    <th class="bg-primary text-white">Roll No</th>
+                    <th class="bg-primary text-white">Father Name</th>
+                    <th class="bg-primary text-white">Course</th>
+                    <th class="bg-primary text-white">Gender</th>
+                    <th class="bg-primary text-white">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -128,9 +128,9 @@ if (isset($_REQUEST['edit'])) {
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-primary text-white d-flex justify-content-between align-items-center">
                 <h1 class="modal-title fs-5 " id="exampleModalLabel">Add Student</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <span type="button" class="pt-1" data-bs-dismiss="modal" aria-label="Close"><span class="text-white"><i class="fa-solid fa-xmark fs-4"></i></span></span>
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
