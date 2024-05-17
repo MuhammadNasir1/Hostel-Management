@@ -203,3 +203,44 @@ hr.h-color {
 .navbar img {
   height: 40px;
 }
+
+/* Login Page */
+
+.login-page {
+  height: 100vh;
+}
+.form-container {
+  height: 33rem;
+  width: 60rem;
+  box-shadow: 0px 6px 12px 0px #00000022;
+}
+.form-container .part-1 {
+  height: 100%;
+  width: 50%;
+  background-color: #004d40;
+}
+.form-container .part-2 {
+  height: 100%;
+  width: 50%;
+}
+.form-container .part-2 .form {
+  width: 100%;
+}
+.form-container .part-2 input {
+  width: 80%;
+  margin: auto;
+  height: 3rem;
+}
+.form-container .part-2 h2 {
+  color: #004d40;
+}
+
+.form-container .part-2 input[type="submit"] {
+  border: none;
+  background: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  transition: 0.2s;
+  /* margin: 20px 0px; */
+  margin: auto;
+}
