@@ -26,7 +26,7 @@ $employesCount = fetchDataAndCount($conn, 'employes');
 ?>
 
 <div class="dashboard-heading">
-    <h1>Dashboard</h1>
+    <h4 class="text-primary fw-semibold">Dashboard</h4>
 </div>
 <div class="row row-cols-1 row-cols-md-4 g-3 mt-2 dashboard">
     <div class="col">

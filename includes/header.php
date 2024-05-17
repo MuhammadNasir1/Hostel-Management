@@ -81,9 +81,15 @@
     </div>
     <div class="content  bg-white  rounded-start-5">
       <div class="dashboard-content">
-        <!-- <div class="navbar d-flex justify-content-between">
-          <div>jcfds</div>
+        <div class="navbar d-flex justify-content-between py-3">
           <div>
-            <img src="" alt="">
+            <!-- <h3>Hostel Management System</h3> -->
           </div>
-        </div> -->
+          <div class="d-flex gap-2">
+            <div class="text-end">
+              <h5 class="m-0 fs-5">Admin</h5>
+              <p class="p-0 m-0">admin</p>
+            </div>
+            <img src="./img/user.png" alt="User" class="mt-1">
+          </div>
+        </div>

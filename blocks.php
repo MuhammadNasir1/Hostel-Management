@@ -66,7 +66,8 @@ if (isset($_REQUEST['edit'])) {
     <div class=" shadow p-4 rounded-1">
         <div class="d-flex justify-content-between  mb-5">
             <h5 class="text-primary ">Blocks List</h5>
-            <button class="btn bg-primary text-white px-3 py-2 fw-semibold" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Block</button>
+            <button class="btn bg-primary text-white px-3 py-2 fw-semibold" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <span>+</span> Add Block</button>
         </div>
         <table class="table table-responsive" id="myTable">
             <thead>
