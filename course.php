@@ -5,7 +5,6 @@ if (@!$_SESSION['login']) {
 }
 
 $title = "Courses";
-include("./includes/header.php");
 
 
 if (isset($_POST['submit'])) {
@@ -44,7 +43,7 @@ if (isset($_REQUEST['del'])) {
         echo 'Data Not Added';
     }
 }
-
+include("./includes/header.php");
 if (isset($_REQUEST['edit'])) {
 ?>
     <script>

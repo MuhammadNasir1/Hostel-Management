@@ -5,7 +5,6 @@ if (@!$_SESSION['login']) {
 }
 
 $title = "Block";
-include("./includes/header.php");
 
 
 if (isset($_POST['submit'])) {
@@ -45,7 +44,7 @@ if (isset($_REQUEST['del'])) {
     }
 }
 
-
+include("./includes/header.php");
 if (isset($_REQUEST['edit'])) {
 ?>
     <script>

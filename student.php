@@ -5,9 +5,6 @@ if (@!$_SESSION['login']) {
 }
 
 $title = "Student";
-include("./includes/header.php");
-
-
 if (isset($_POST['save'])) {
     $id = $_POST['updateID'];
     $name = $_POST['name'];
@@ -63,7 +60,7 @@ $result = mysqli_query($conn, $get);
 
 $course = "SELECT * FROM `course`";
 $re = mysqli_query($conn, $course);
-
+include("./includes/header.php");
 if (isset($_REQUEST['edit'])) {
 ?>
     <script>
@@ -77,6 +74,8 @@ if (isset($_REQUEST['edit'])) {
     $res = mysqli_query($conn, $sql);
     $updateData  = mysqli_fetch_assoc($res);
 }
+
+
 ?>
 
 <div class="container-fluid mt-4">
