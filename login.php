@@ -40,9 +40,9 @@
                     <h2 class="text-center fw-bold">LOGIN</h2>
                     <div class="mt-2"><input type="email" placeholder="Email" name="email" class="form-control" /></div>
                     <div class="mt-2"> <input type="password" placeholder="Password" name="password" class="form-control" /></div>
-                    <?php
-                    echo @$error;
-                    ?>
+                    <div class="text-center"> <?php
+                                                echo @$error;
+                                                ?></div>
                     <input type="submit" value="Log In" class="mt-2 py-2" />
             </div>
         </div>
