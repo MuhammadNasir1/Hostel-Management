@@ -4,7 +4,7 @@ if (@!$_SESSION['login']) {
     header("Location: login.php");
 }
 
-$title = "Rooms";
+$title = "Book Room";
 
 
 
@@ -15,18 +15,16 @@ if (isset($_POST['submit'])) {
     $join_date = $_POST['join_date'];
     $end_date = $_POST['end_date'];
     $food_type = $_POST['food_type'];
-    $beverage_type = $_POST['beverage_type'];
-    $status = $_POST['status'];
 
 
     if (empty($id)) {
-        $insert = "INSERT INTO `room_registration`(`student_id`, `room_id`, `join_date`, `end_date`, `food_type`, `beverage_type`, `status`) VALUES ('0','0','$join_date','$end_date','$food_type','$beverage_type','$status')";
+        $insert = "INSERT INTO `room_registration`(`student_id`, `room_id`, `join_date`, `end_date`, `food_type`, `total_fee`) VALUES ('$student_id','$room_id','$join_date','$end_date','$food_type','0')";
         $query = mysqli_query($conn, $insert);
         if ($insert) {
             header('location: book-room.php');
         }
     } else {
-        $update = "UPDATE `room_registration` SET `student_id`='0',`room_id`='0',`join_date`='$join_date',`end_date`='$end_date',`food_type`='$food_type',`beverage_type`='$beverage_type',`status`='$status' WHERE id = $id";
+        $update = "UPDATE `room_registration` SET `student_id`='$student_id',`room_id`='$room_id',`join_date`='$join_date',`end_date`='$end_date',`food_type`='$food_type',`total_fee`='0' WHERE id = $id";
         $updateQuery = mysqli_query($conn, $update);
         if ($updateQuery) {
             header('location: book-room.php');
@@ -89,7 +87,6 @@ if (isset($_REQUEST['edit'])) {
                     <th class="bg-primary text-white">Join Date</th>
                     <th class="bg-primary text-white">End Date</th>
                     <th class="bg-primary text-white">Food Type</th>
-                    <th class="bg-primary text-white">Beverage Type</th>
                     <th class="bg-primary text-white">Action</th>
 
                 </tr>
@@ -105,7 +102,6 @@ if (isset($_REQUEST['edit'])) {
                         <td><?= $row['join_date'] ?></td>
                         <td><?= $row['end_date'] ?></td>
                         <td><?= $row['food_type'] ?></td>
-                        <td><?= $row['beverage_type'] ?></td>
                         <td>
                             <a href="room_registration.php?edit=<?= $row['id'] ?>"><button class="bg-primary text-white rounded-circle px-2 py-1"><i class="fa-regular fa-pen-to-square"></i></button></a>
                             <a href="room_registration.php?del=<?= $row['id'] ?>"><button class="bg-primary text-white rounded-circle px-2 py-1"><i class="fa-solid fa-trash-can"></i></button></a>
@@ -141,7 +137,7 @@ if (isset($_REQUEST['edit'])) {
                                     <?php
                                     while ($row = mysqli_fetch_assoc($res)) {
                                     ?>
-                                        <option <?= (@$updateData['student_id'] == $row['name']) ? 'selected' : ''; ?> value="<?= $row['name'] ?>"><?= $row['name'] ?></option>
+                                        <option <?= (@$updateData['student_id'] == $row['name']) ? 'selected' : ''; ?> value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
                                     <?php
                                     }
                                     ?>
@@ -153,7 +149,7 @@ if (isset($_REQUEST['edit'])) {
                                     <?php
                                     while ($row = mysqli_fetch_assoc($re)) {
                                     ?>
-                                        <option <?= (@$updateData['room_id'] == $row['room_no']) ? 'selected' : ''; ?> value="<?= $row['room_no'] ?>"><?= $row['room_no'] ?></option>
+                                        <option <?= (@$updateData['room_id'] == $row['room_no']) ? 'selected' : ''; ?> value="<?= $row['id'] ?>"><?= $row['room_no'] ?></option>
                                     <?php
                                     }
                                     ?>
@@ -171,24 +167,11 @@ if (isset($_REQUEST['edit'])) {
                             </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-lg-6">
+                            <div class="col">
                                 <label for="food_type" class="form-label">Food Type</label>
                                 <select name="food_type" id="food_type" class="form-select">
                                     <option <?= (@$updateData['food_type'] == 'With Food') ? 'selected' : ''; ?> value="With Food">With Food</option>
                                     <option <?= (@$updateData['food_type'] == 'Without Food') ? 'selected' : ''; ?> value="Without Food">Without Food</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-6 mt-lg-0 mt-3">
-                                <label for="beverage_type" class="form-label">Beverage Type</label>
-                                <input type="text" name="beverage_type" id="beverage_type" class="form-control" value="<?= @$updateData['beverage_type'] ?>">
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col">
-                                <label for="status" class="form-label">Status</label>
-                                <select name="status" id="status" class="form-select">
-                                    <option <?= (@$updateData['status'] == 'Active') ? 'selected' : ''; ?> value="Active">Active</option>
-                                    <option <?= (@$updateData['status'] == 'InActive') ? 'selected' : ''; ?> value="InActive">InActive</option>
                                 </select>
                             </div>
                         </div>

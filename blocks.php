@@ -11,17 +11,16 @@ if (isset($_POST['submit'])) {
     $id = $_POST['updateID'];
     $block_name = $_POST['block_name'];
     $gender = $_POST['gender'];
-    $block_status = $_POST['block_status'];
     $block_description = $_POST['block_description'];
 
     if (empty($id)) {
-        $insert = "INSERT INTO `blocks`(`block_name`, `gender`, `block_status`, `block_descriptipn`) VALUES ('$block_name','$gender','$block_status','$block_description')";
+        $insert = "INSERT INTO `blocks`(`block_name`, `gender`,  `block_description`) VALUES ('$block_name','$gender','$block_description')";
         $query = mysqli_query($conn, $insert);
         if ($insert) {
             header('location: blocks.php');
         }
     } else {
-        $update = "UPDATE `blocks` SET `block_name`='$block_name',`gender`='$gender',`block_status`='$block_status',`block_descriptipn`='$block_description' WHERE id = $id";
+        $update = "UPDATE `blocks` SET `block_name`='$block_name',`gender`='$gender',`block_description`='$block_description' WHERE id = $id";
         $updateQuery = mysqli_query($conn, $update);
         if ($updateQuery) {
             header('location: blocks.php');
@@ -74,7 +73,7 @@ if (isset($_REQUEST['edit'])) {
                     <th class="bg-primary text-white">Sno.</th>
                     <th class="bg-primary text-white">Block Name</th>
                     <th class="bg-primary text-white">Gender</th>
-                    <th class="bg-primary text-white">Block Status</th>
+                    <th class="bg-primary text-white">Description</th>
                     <th class="bg-primary text-white">Action</th>
 
                 </tr>
@@ -89,7 +88,7 @@ if (isset($_REQUEST['edit'])) {
                         <td><?= $a ?></td>
                         <td><?= $row['block_name'] ?></td>
                         <td><?= $row['gender'] ?></td>
-                        <td><?= $row['block_status'] ?></td>
+                        <td><?= $row['block_description'] ?></td>
                         <td>
                             <a href="blocks.php?edit=<?= $row['id'] ?>"><button class="bg-primary text-white rounded-circle px-2 py-1"><i class="fa-regular fa-pen-to-square"></i></button></a>
                             <a href="blocks.php?del=<?= $row['id'] ?>"><button class="bg-primary text-white rounded-circle px-2 py-1"><i class="fa-solid fa-trash-can"></i></button></a>
@@ -119,23 +118,15 @@ if (isset($_REQUEST['edit'])) {
                     <form action="#" method="post" class="form">
                         <input type="hidden" name="updateID" value="<?= @$updateData['id'] ?>">
                         <div class="row">
-                            <div class="col-md-4 col-12">
+                            <div class="col-md-6 col-12">
                                 <label for="block_name" class="form-label text-primary">Block Name</label>
                                 <input type="text" name="block_name" required placeholder="Enter Block Name" id="block_name" class="form-control" value="<?= @$updateData['block_name'] ?>">
                             </div>
-                            <div class="col-md-4 col-12">
+                            <div class="col-md-6 col-12">
                                 <label for="gender" class="form-label text-primary">Gender</label>
                                 <select name="gender" id="gender" class="form-select">
                                     <option <?= (@$updateData['gender'] == 'Male') ? 'selected' : ''; ?> value="Male">Male</option>
                                     <option <?= (@$updateData['gender'] == 'Female') ? 'selected' : ''; ?> value="Female">Female</option>
-                                    <option <?= (@$updateData['gender'] == 'others') ? 'selected' : ''; ?> value="others">others</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4 col-12">
-                                <label for="block_status" class="form-label text-primary">Status</label>
-                                <select name="block_status" id="block_status" class="form-select">
-                                    <option <?= (@$updateData['block_status'] == 'Active') ? 'selected' : ''; ?> value="Active">Active</option>
-                                    <option <?= (@$updateData['block_status'] == 'InActive') ? 'selected' : ''; ?> value="InActive">InActive</option>
                                 </select>
                             </div>
                         </div>

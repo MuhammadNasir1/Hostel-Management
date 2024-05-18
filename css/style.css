@@ -244,3 +244,8 @@ hr.h-color {
   /* margin: 20px 0px; */
   margin: auto;
 }
+
+.active > .page-link,
+.page-link.active {
+  background-color: var(--primary-color) !important;
+}
