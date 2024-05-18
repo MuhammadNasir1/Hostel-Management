@@ -118,8 +118,8 @@ if (isset($_REQUEST['edit'])) {
                         <td><?= $row['emp_type'] ?></td>
                         <td><?= $row['date_of_join'] ?></td>
                         <td>
-                            <a href="employes.php?edit=<?= $row['id'] ?>"><button class="btn bg-primary text-white btn-sm">Edit</button></a>
-                            <a href="employes.php?del=<?= $row['id'] ?>"><button class="btn bg-primary text-white btn-sm">Delete</button></a>
+                            <a href="employes.php?edit=<?= $row['id'] ?>"><button class="bg-primary text-white rounded-circle px-2 py-1"><i class="fa-regular fa-pen-to-square"></i></button></a>
+                            <a href="employes.php?del=<?= $row['id'] ?>"><button class="bg-primary text-white rounded-circle px-2 py-1"><i class="fa-solid fa-trash-can"></i></button></a>
                         </td>
 
                     </tr>

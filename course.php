@@ -91,8 +91,8 @@ if (isset($_REQUEST['edit'])) {
                         <td><?= $row['no_of_year'] ?></td>
                         <td><?= $row['course_status'] ?></td>
                         <td>
-                            <a href="course.php?edit=<?= $row['id'] ?>"><button class="btn bg-primary text-white btn-sm">Edit</button></a>
-                            <a href="course.php?del=<?= $row['id'] ?>"><button class="btn bg-primary text-white btn-sm">Delete</button></a>
+                            <a href="course.php?edit=<?= $row['id'] ?>"><button class="bg-primary text-white rounded-circle px-2 py-1"><i class="fa-regular fa-pen-to-square"></i></button></a>
+                            <a href="course.php?del=<?= $row['id'] ?>"><button class="bg-primary text-white rounded-circle px-2 py-1"><i class="fa-solid fa-trash-can"></i></button></a>
                         </td>
 
                     </tr>
