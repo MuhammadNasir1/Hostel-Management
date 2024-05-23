@@ -19,7 +19,7 @@
   <div class="main-container d-flex bg-primary">
     <div class="sidebar " id="side_nav">
       <div class="header-box px-2 pt-3 pb-4 d-flex justify-content-between">
-        <h1 class="fs-4"><span class="text-white ps-3">HMS</span></h1>
+        <a class="mx-auto" href="./"> <img height="130px" class="rounded mx-auto" src="./img/Logo-white.png" alt="Logo"></a>
         <button class="btn d-md-none d-block close-btn px-1 py-0 text-white"><i class="fal fa-stream"></i></button>
       </div>
 

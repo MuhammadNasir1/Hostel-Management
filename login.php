@@ -36,6 +36,9 @@
                 <h1 class="fw-bold">Welcome!</h1>
             </div>
             <div class="part-2 d-flex justify-content-center align-items-center flex-column ">
+                <div>
+                    <img src="./img/Logo.png" alt="logo">
+                </div>
                 <form action="#" method="POST" class="form d-flex flex-column justify-content-center gap-2">
                     <h2 class="text-center fw-bold">LOGIN</h2>
                     <div class="mt-2"><input type="email" placeholder="Email" name="email" class="form-control" /></div>
