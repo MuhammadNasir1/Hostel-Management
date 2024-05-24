@@ -26,7 +26,6 @@ select:focus {
   box-shadow: none;
 }
 
-
 #side_nav {
   background: var(--primary-color);
   min-width: 250px;
@@ -158,6 +157,7 @@ hr.h-color {
   background: var(--primary-color);
   color: white;
   font-weight: bold;
+
   transition: 0.2s;
   /* margin: 20px 0px; */
   margin: auto;
@@ -166,4 +166,9 @@ hr.h-color {
 .active > .page-link,
 .page-link.active {
   background-color: var(--primary-color) !important;
+}
+
+.setting-img-con {
+  height: 200px;
+  width: 200px;
 }
