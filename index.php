@@ -44,7 +44,7 @@ $employesCount = fetchDataAndCount($conn, 'employes');
     </div>
 
     <div class="col">
-        <div class="card text-white  rounded-3 py-3 px-5" style="background-color: #ffba08;">
+        <div class="card text-white  rounded-3he py-3 px-5" style="background-color: #ffba08;">
             <div class="d-flex gap-2 justify-content-between align-items-center ">
                 <div>
                     <p class="mb-1">Total Rooms</p>
