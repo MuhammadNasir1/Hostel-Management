@@ -176,10 +176,9 @@ if (isset($_REQUEST['edit'])) {
                             <div class="col-lg-4">
                                 <label for="emp_gender" class="form-label text-primary">Gender</label>
                                 <select name="emp_gender" id="emp_gender" class="form-select">
-
+                                    <option selected disabled>Select Gender</option>
                                     <option <?= (@$updateData['gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
                                     <option <?= (@$updateData['gender'] == 'Female') ? 'selected' : ''; ?>>Female</option>
-                                    <option <?= (@$updateData['gender'] == 'Others') ? 'selected' : ''; ?>>Others</option>
 
                                 </select>
                             </div>

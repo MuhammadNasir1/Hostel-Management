@@ -162,7 +162,7 @@ if (isset($_REQUEST['edit'])) {
                                 <div class="col-md-4 col-12 mt-md-0 mt-3">
                                     <label for="course" class="form-label text-primary">Course</label>
                                     <select class="form-select" required name="course" id="course" aria-label="Default select example">
-                                        <option selected>Select Course</option>
+                                        <option selected disabled>Select Course</option>
                                         <?php
                                         while ($row = mysqli_fetch_assoc($re)) {
                                         ?>
@@ -175,11 +175,10 @@ if (isset($_REQUEST['edit'])) {
                                 <div class="col-md-4 col-12">
                                     <label for="gender" class="form-label text-primary">Gender</label>
                                     <select class="form-select" name="gender" required id="gender" aria-label="Default select example">
-                                        <option>Select Gender</option>
+                                        <option selected disabled>Select Gender</option>
                                         <option <?= (@$updateData['gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
                                         <option <?= (@$updateData['gender'] == 'Female') ? 'selected' : ''; ?>>Female</option>
-                                        <option <?= (@$updateData['gender'] == 'others') ? 'selected' : ''; ?>>others</option>
-                                    </select>
+                                    </select> 
                                 </div>
                             </div>
                             <div class="row mt-3 ">

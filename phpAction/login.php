@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (mysqli_num_rows($passwordCheckResult) == 1) {
             $row = mysqli_fetch_assoc($passwordCheckResult);
             $_SESSION['login'] =  true;
+            $_SESSION['user_name'] =  $row['user_name'];
             $_SESSION['email'] =  $row['email'];
             $_SESSION['role'] =  $row['role'];
             echo "success";

@@ -64,7 +64,7 @@
             <span><i class="fa-solid fa-table-cells-large fs-4"></i></span>
             <span class="ms-3">Blocks</span>
           </a></li>
-        <li class="mt-2"><a href="#" class="text-decoration-none p-2 d-flex align-items-center">
+        <li class="mt-2"><a href="./setting.php" class="text-decoration-none p-2 d-flex align-items-center">
             <span><i class="fa-solid fa-gear fs-4"></i></span>
             <span class="ms-3">Settings</span></a></li>
       </ul>
@@ -87,8 +87,8 @@
           </div>
           <div class="d-flex gap-2">
             <div class="text-end">
-              <h5 class="m-0 fs-5">Admin</h5>
-              <p class="p-0 m-0">admin</p>
+              <h5 class="m-0 fs-5"><?= $_SESSION['user_name'] ?></h5>
+              <p class="p-0 m-0"><?= $_SESSION['role'] ?></p>
             </div>
             <img src="./img/user.png" alt="User" class="mt-1">
           </div>

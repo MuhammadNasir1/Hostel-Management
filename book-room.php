@@ -6,8 +6,6 @@ if (@!$_SESSION['login']) {
 
 $title = "Book Room";
 
-
-
 if (isset($_POST['submit'])) {
     $id = $_POST['updateID'];
     $student_id = $_POST['student_id'];
@@ -50,8 +48,6 @@ if (isset($_REQUEST['del'])) {
 
     if ($query) {
         header('location: book-room.php');
-    } else {
-        echo 'Data Not Added';
     }
 }
 include("./includes/header.php");
@@ -149,7 +145,7 @@ if (isset($_REQUEST['edit'])) {
                                     <?php
                                     while ($row = mysqli_fetch_assoc($re)) {
                                     ?>
-                                        <option <?= (@$updateData['room_id'] == $row['room_no']) ? 'selected' : ''; ?> value="<?= $row['id'] ?>"><?= $row['room_no'] ?></option>
+                                        <option <?= (@$updateData['room_id'] == $row['room_no']) ? 'selected' : ''; ?> value="<?= $row['id'] ?>" room-fees="<?= $row['room_fee'] ?>"><?= $row['room_no'] ?></option>
                                     <?php
                                     }
                                     ?>
@@ -167,12 +163,16 @@ if (isset($_REQUEST['edit'])) {
                             </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col">
-                                <label for="food_type" class="form-label">Food Type</label>
+                            <div class="col-6">
+                                <label for="food_type" class="form-label">Food Type (Extra 2000Pkr)</label>
                                 <select name="food_type" id="food_type" class="form-select">
-                                    <option <?= (@$updateData['food_type'] == 'With Food') ? 'selected' : ''; ?> value="With Food">With Food</option>
-                                    <option <?= (@$updateData['food_type'] == 'Without Food') ? 'selected' : ''; ?> value="Without Food">Without Food</option>
+                                    <option food-price="2000" <?= (@$updateData['food_type'] == 'With Food') ? 'selected' : ''; ?> value="With Food">With Food</option>
+                                    <option food-price="0" <?= (@$updateData['food_type'] == 'Without Food') ? 'selected' : ''; ?> value="Without Food">Without Food</option>
                                 </select>
+                            </div>
+                            <div class="col-lg-6 ">
+                                <label for="Fees" class="form-label">Total Fees Per Month (readOnly)</label>
+                                <input type="text" name="Fees" id="Fees" class="form-control" value="0">
                             </div>
                         </div>
 

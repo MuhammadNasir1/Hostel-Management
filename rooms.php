@@ -144,6 +144,8 @@ if (isset($_REQUEST['edit'])) {
                                     <option <?= (@$updateData['no_of_beds'] == '1') ? 'selected' : ''; ?> value="1">One</option>
                                     <option <?= (@$updateData['no_of_beds'] == '2') ? 'selected' : ''; ?> value="2">Two</option>
                                     <option <?= (@$updateData['no_of_beds'] == '3') ? 'selected' : ''; ?> value="3">Three</option>
+                                    <option <?= (@$updateData['no_of_beds'] == '4') ? 'selected' : ''; ?> value="4">Four</option>
+                                    <option <?= (@$updateData['no_of_beds'] == '5') ? 'selected' : ''; ?> value="5">Five</option>
                                 </select>
                             </div>
 
