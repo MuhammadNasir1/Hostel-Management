@@ -13,16 +13,17 @@ if (isset($_POST['submit'])) {
     $join_date = $_POST['join_date'];
     $end_date = $_POST['end_date'];
     $food_type = $_POST['food_type'];
+    $total_fee = $_POST['total_fee'];
 
 
     if (empty($id)) {
-        $insert = "INSERT INTO `room_registration`(`student_id`, `room_id`, `join_date`, `end_date`, `food_type`, `total_fee`) VALUES ('$student_id','$room_id','$join_date','$end_date','$food_type','0')";
+        $insert = "INSERT INTO `room_registration`(`student_id`, `room_id`, `join_date`, `end_date`, `food_type`, `total_fee`) VALUES ('$student_id','$room_id','$join_date','$end_date','$food_type','$total_fee')";
         $query = mysqli_query($conn, $insert);
         if ($insert) {
             header('location: book-room.php');
         }
     } else {
-        $update = "UPDATE `room_registration` SET `student_id`='$student_id',`room_id`='$room_id',`join_date`='$join_date',`end_date`='$end_date',`food_type`='$food_type',`total_fee`='0' WHERE id = $id";
+        $update = "UPDATE `room_registration` SET `student_id`='$student_id',`room_id`='$room_id',`join_date`='$join_date',`end_date`='$end_date',`food_type`='$food_type',`total_fee`='$total_fee' WHERE id = $id";
         $updateQuery = mysqli_query($conn, $update);
         if ($updateQuery) {
             header('location: book-room.php');
@@ -99,8 +100,8 @@ if (isset($_REQUEST['edit'])) {
                         <td><?= $row['end_date'] ?></td>
                         <td><?= $row['food_type'] ?></td>
                         <td>
-                            <a href="room_registration.php?edit=<?= $row['id'] ?>"><button class="bg-primary text-white rounded-circle px-2 py-1"><i class="fa-regular fa-pen-to-square"></i></button></a>
-                            <a href="room_registration.php?del=<?= $row['id'] ?>"><button class="bg-primary text-white rounded-circle px-2 py-1"><i class="fa-solid fa-trash-can"></i></button></a>
+                            <a href="book-room.php?edit=<?= $row['id'] ?>"><button class="bg-primary text-white rounded-circle px-2 py-1"><i class="fa-regular fa-pen-to-square"></i></button></a>
+                            <a href="book-room.php?del=<?= $row['id'] ?>"><button class="bg-primary text-white rounded-circle px-2 py-1"><i class="fa-solid fa-trash-can"></i></button></a>
                         </td>
 
                     </tr>
@@ -133,19 +134,21 @@ if (isset($_REQUEST['edit'])) {
                                     <?php
                                     while ($row = mysqli_fetch_assoc($res)) {
                                     ?>
-                                        <option <?= (@$updateData['student_id'] == $row['name']) ? 'selected' : ''; ?> value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                                        <option <?= (@$updateData['student_id'] == $row['id']) ? 'selected' : ''; ?> value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
                                     <?php
                                     }
                                     ?>
                                 </select>
                             </div>
                             <div class="col-lg-6 mt-lg-0 mt-3">
-                                <label for="room_id" class="form-label">Room</label>
-                                <select name="room_id" id="room_id" class="form-select">
+                                <label for="room" class="form-label">Room</label>
+                                <select name="room_id" id="room" class="form-select">
+                                    <option selected disabled>Select Room</option>
                                     <?php
                                     while ($row = mysqli_fetch_assoc($re)) {
                                     ?>
-                                        <option <?= (@$updateData['room_id'] == $row['room_no']) ? 'selected' : ''; ?> value="<?= $row['id'] ?>" room-fees="<?= $row['room_fee'] ?>"><?= $row['room_no'] ?></option>
+                                        <option <?= (@$updateData['room_id'] == $row['id']) ? 'selected' : ''; ?> value="<?= isset($_REQUEST['edit']) ? $row['id'] : $updateData['room_id']; ?>
+" room-fees="<?= $row['room_fee'] ?>"><?= $row['room_no'] ?></option>
                                     <?php
                                     }
                                     ?>
@@ -164,15 +167,16 @@ if (isset($_REQUEST['edit'])) {
                         </div>
                         <div class="row mt-3">
                             <div class="col-6">
-                                <label for="food_type" class="form-label">Food Type (Extra 2000Pkr)</label>
+                                <label for="food_type" class="form-label">Food Status (Extra 2000Pkr)</label>
                                 <select name="food_type" id="food_type" class="form-select">
+                                    <option selected disabled>Select Food Status</option>
                                     <option food-price="2000" <?= (@$updateData['food_type'] == 'With Food') ? 'selected' : ''; ?> value="With Food">With Food</option>
                                     <option food-price="0" <?= (@$updateData['food_type'] == 'Without Food') ? 'selected' : ''; ?> value="Without Food">Without Food</option>
                                 </select>
                             </div>
                             <div class="col-lg-6 ">
-                                <label for="Fees" class="form-label">Total Fees Per Month (readOnly)</label>
-                                <input type="text" name="Fees" id="Fees" class="form-control" value="0">
+                                <label for="totalFee" class="form-label">Total Fees Per Month (readOnly)</label>
+                                <input type="text" name="total_fee" id="totalFee" class="form-control" value="<?= @$updateData['total_fee'] ?>">
                             </div>
                         </div>
 
@@ -187,6 +191,33 @@ if (isset($_REQUEST['edit'])) {
     </div>
 </div>
 
+<?php
+// if (!isset($_REQUEST['edit'])) {
+
+
+?>
+<script>
+    $(document).ready(function() {
+        function updateTotalFee() {
+            var selectedRoom = $('#room').find('option:selected');
+            var roomFee = parseFloat(selectedRoom.attr('room-fees')) || 0;
+
+            var selectedFood = $('#food_type').find('option:selected');
+            var foodPrice = parseFloat(selectedFood.attr('food-price')) || 0;
+
+            var totalFee = roomFee + foodPrice;
+            $('#totalFee').val(totalFee);
+        }
+
+        $('#room, #food_type').change(updateTotalFee);
+
+        updateTotalFee();
+    });
+</script>
+<?php
+
+// }
+?>
 <?php
 include("./includes/footer.php")
 ?>
