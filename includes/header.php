@@ -31,7 +31,7 @@
             <span class="ms-3">Dashboard</span>
           </a></li>
         <li class="mt-2">
-          <a href="#" class="text-decoration-none p-2 d-flex align-items-center">
+          <a href="./fee-details.php" class="text-decoration-none p-2 d-flex align-items-center">
             <span><i class="fa-solid fa-comments-dollar fs-5"></i></span>
             <span class="ms-3">Fees</span>
           </a>
