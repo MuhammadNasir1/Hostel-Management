@@ -208,8 +208,10 @@ if (isset($_REQUEST['edit'])) {
                                 <input type="email" name="email_id" placeholder="Enter Email Address" id="email_id" class="form-control" value="<?= @$updateData['emp_email'] ?>">
                             </div>
                             <div class="col-lg-4 mt-lg-0 mt-3">
-                                <label for="emp_password" class="form-label text-primary">Login Password</label>
-                                <input type="password" name="emp_password" placeholder="Enter Login Password" id="emp_password" class="form-control">
+                                <label for="password" class="form-label text-primary">Login Password</label>
+                                <input type="password" name="emp_password" placeholder="Enter Login Password" id="password" class="form-control">
+                                <div id="message" class="invalid">Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.</div>
+
                             </div>
 
 
@@ -230,3 +232,63 @@ if (isset($_REQUEST['edit'])) {
 <?php
 include("./includes/footer.php")
 ?>
+
+<script>
+    function validatePassword(password) {
+        const minLength = 8;
+        const hasUpperCase = /[A-Z]/;
+        const hasLowerCase = /[a-z]/;
+        const hasNumber = /[0-9]/;
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/;
+
+        if (password.length < minLength) {
+            return {
+                valid: false,
+                message: "Password must be at least 8 characters long."
+            };
+        }
+        if (!hasUpperCase.test(password)) {
+            return {
+                valid: false,
+                message: "Password must contain at least one uppercase letter."
+            };
+        }
+        if (!hasLowerCase.test(password)) {
+            return {
+                valid: false,
+                message: "Password must contain at least one lowercase letter."
+            };
+        }
+        if (!hasNumber.test(password)) {
+            return {
+                valid: false,
+                message: "Password must contain at least one number."
+            };
+        }
+        if (!hasSpecialChar.test(password)) {
+            return {
+                valid: false,
+                message: "Password must contain at least one special character."
+            };
+        }
+
+        return {
+            valid: true,
+            message: "Password is strong."
+        };
+    }
+
+    document.getElementById('password').addEventListener('input', function() {
+        const password = this.value;
+        const result = validatePassword(password);
+        const messageDiv = document.getElementById('message');
+
+        if (result.valid) {
+            messageDiv.textContent = result.message;
+            messageDiv.className = 'valid';
+        } else {
+            messageDiv.textContent = result.message;
+            messageDiv.className = 'invalid';
+        }
+    });
+</script>

@@ -172,3 +172,10 @@ hr.h-color {
   height: 200px;
   width: 200px;
 }
+
+.valid {
+  color: green;
+}
+.invalid {
+  color: red;
+}
