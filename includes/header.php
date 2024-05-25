@@ -57,9 +57,18 @@
             <span class="ms-3">Book Room</span>
           </a>
         </li>
-        <li class="mt-2"><a href="./employes.php" class="text-decoration-none p-2 d-flex align-items-center">
-            <span><i class="fa-solid fa-users-line fs-5"></i></span>
-            <span class="ms-3">Employes</span></a></li>
+
+        <?php
+        if ($_SESSION['role'] == "admin") {
+        ?>
+          <li class="mt-2"><a href="./employes.php" class="text-decoration-none p-2 d-flex align-items-center">
+              <span><i class="fa-solid fa-users-line fs-5"></i></span>
+              <span class="ms-3">Employes</span></a></li>
+        <?php
+        }
+
+        ?>
+
         <li class="mt-2"><a href="./blocks.php" class="text-decoration-none p-2 d-flex align-items-center">
             <span><i class="fa-solid fa-table-cells-large fs-4"></i></span>
             <span class="ms-3">Blocks</span>
