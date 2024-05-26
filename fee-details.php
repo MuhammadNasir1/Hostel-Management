@@ -7,7 +7,6 @@ if (@!$_SESSION['login']) {
 $title = "Fee Details";
 
 
-
 include("./includes/header.php");
 if (isset($_REQUEST['edit'])) {
 ?>
@@ -37,7 +36,7 @@ if (isset($_REQUEST['edit'])) {
                     <th class="bg-primary text-white">Sno.</th>
                     <th class="bg-primary text-white">Student Name</th>
                     <th class="bg-primary text-white">Roll No</th>
-                    <th class="bg-primary text-white">Joining Date</th>
+                    <th class="bg-primary text-white">Joining Date (month start from)</th>
                     <th class="bg-primary text-white">Fee per Month</th>
                     <th class="bg-primary text-white">Fee Type (this month)</th>
                     <th class="bg-primary text-white">Action</th>
@@ -45,17 +44,54 @@ if (isset($_REQUEST['edit'])) {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Peter</td>
-                    <td>1234567</td>
-                    <td>200Pkr</td>
-                    <td>200Pkr</td>
-                    <td><button class="btn bg-danger text-white px-3 py-2 fw-semibold">
-                            <span></span> Pending</button></< /td>
-                    <td> <button class="btn bg-primary text-white px-3 py-2 fw-semibold">
-                            <span></span> Change Status</button></td>
-                </tr>
+                <?php
+                $reg_res = mysqli_query($conn, "SELECT * FROM `room_registration`");
+                $i  = 0;
+                while ($data = mysqli_fetch_assoc($reg_res)) :
+                    $i++;
+                    $student_id = $data['student_id'];
+
+                    // Query to get student data based on student_id
+                    $student_res = mysqli_query($conn, "SELECT * FROM `students` WHERE `id` = '$student_id'");
+                    $student_data = mysqli_fetch_assoc($student_res);
+
+
+                    $joinDate = new DateTime($data['fee_pay_date']);
+                    $currentDate = new DateTime();
+                    $interval = $joinDate->diff($currentDate);
+
+                    // Determine if one month has passed since the join date    
+                    $monthsPassed = $interval->m + ($interval->y * 12);
+                    if ($monthsPassed >= 1) {
+                        // Update the fee status to pending
+                        if (@$data['fee_status'] == "pending") {
+                            // Update the fee status to 'pending'
+                            $feeStatus = 'pending';
+                            // Update the database with the new fee status
+                            $conn->query("UPDATE room_registration SET fee_status = 'pending' WHERE student_id = $student_id LIMIT 1");
+                        } else {
+
+                            $feeStatus = 'paid';
+                            $conn->query("UPDATE room_registration SET fee_status = 'pending' WHERE student_id = $student_id LIMIT 1");
+                        }
+                    }
+
+                ?>
+                    <tr>
+                        <td><?= $i ?></td>
+                        <td><?= $student_data['name'] ?></td>
+                        <td><?= $student_data['roll_no'] ?></td>
+                        <td><?= $data['join_date'] ?></td>
+                        <td><?= $data['total_fee'] ?></td>
+                        <td><button class="btn <?= (isset($data['fee_status']) && $data['fee_status'] == "pending") ? "bg-danger" : "bg-success" ?>
+ text-white px-3 py-2 fw-semibold">
+                                <span></span> <?= $data['fee_status'] ?></button></< /td>
+                        <td> <button class="btn bg-primary text-white px-3 py-2 fw-semibold">
+                                <span></span> Change Status</button></td>
+                    </tr>
+                <?php
+                endwhile;
+                ?>
             </tbody>
         </table>
     </div>

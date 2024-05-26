@@ -11,19 +11,19 @@ if (isset($_POST['submit'])) {
     $student_id = $_POST['student_id'];
     $room_id = $_POST['room_id'];
     $join_date = $_POST['join_date'];
-    $end_date = $_POST['end_date'];
+    $fee_pay_date = $_POST['fee_pay_date'];
     $food_type = $_POST['food_type'];
     $total_fee = $_POST['total_fee'];
 
 
     if (empty($id)) {
-        $insert = "INSERT INTO `room_registration`(`student_id`, `room_id`, `join_date`, `end_date`, `food_type`, `total_fee`) VALUES ('$student_id','$room_id','$join_date','$end_date','$food_type','$total_fee')";
+        $insert = "INSERT INTO `room_registration`(`student_id`, `room_id`, `join_date`, `fee_pay_date`, `food_type`, `total_fee`) VALUES ('$student_id','$room_id','$join_date','$fee_pay_date','$food_type','$total_fee')";
         $query = mysqli_query($conn, $insert);
         if ($insert) {
             header('location: book-room.php');
         }
     } else {
-        $update = "UPDATE `room_registration` SET `student_id`='$student_id',`room_id`='$room_id',`join_date`='$join_date',`end_date`='$end_date',`food_type`='$food_type',`total_fee`='$total_fee' WHERE id = $id";
+        $update = "UPDATE `room_registration` SET `student_id`='$student_id',`room_id`='$room_id',`join_date`='$join_date',`fee_pay_date`='$fee_pay_date',`food_type`='$food_type',`total_fee`='$total_fee' WHERE id = $id";
         $updateQuery = mysqli_query($conn, $update);
         if ($updateQuery) {
             header('location: book-room.php');
@@ -82,7 +82,7 @@ if (@isset($_REQUEST['edit'])) {
                 <tr>
                     <th class="bg-primary text-white">Sno.</th>
                     <th class="bg-primary text-white">Join Date</th>
-                    <th class="bg-primary text-white">End Date</th>
+                    <th class="bg-primary text-white">Fee pay Date</th>
                     <th class="bg-primary text-white">Food Type</th>
                     <th class="bg-primary text-white">Action</th>
 
@@ -97,7 +97,7 @@ if (@isset($_REQUEST['edit'])) {
                     <tr>
                         <td><?= $a ?></td>
                         <td><?= $row['join_date'] ?></td>
-                        <td><?= $row['end_date'] ?></td>
+                        <td><?= $row['fee_pay_date'] ?></td>
                         <td><?= $row['food_type'] ?></td>
                         <td>
                             <a href="book-room.php?edit=<?= $row['id'] ?>"><button class="bg-primary text-white rounded-circle px-2 py-1"><i class="fa-regular fa-pen-to-square"></i></button></a>
@@ -163,8 +163,9 @@ if (@isset($_REQUEST['edit'])) {
                                 <input type="date" name="join_date" id="join_date" class="form-control" value="<?= @$updateData['join_date'] ?>">
                             </div>
                             <div class="col-lg-6 mt-lg-0 mt-3">
-                                <label for="end_date" class="form-label">End Date</label>
-                                <input type="date" name="end_date" id="end_date" class="form-control" value="<?= @$updateData['end_date'] ?>">
+                                <label for="fee_pay_date" class="form-label">Fee pay Date </label>
+                                <input type="date" name="fee_pay_date" id="fee_pay_date" class="form-control" value="<?= @$updateData['fee_pay_date'] ?>">
+                                <div class="form-text text-danger">Pay fees on this date every month</div>
                             </div>
                         </div>
                         <div class="row mt-3">
