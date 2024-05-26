@@ -3,6 +3,9 @@ include("./includes/dbconn.php");
 if (@!$_SESSION['login']) {
     header("Location: login.php");
 }
+if ($_SESSION['role'] !== "admin") {
+    header("Location: login.php");
+}
 
 $title = "Block";
 

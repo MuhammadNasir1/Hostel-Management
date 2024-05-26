@@ -33,7 +33,7 @@ $employesCount = fetchDataAndCount($conn, 'employes');
         <div class="card text-white rounded-3 py-3 px-5" style="background-color: #1a759f;">
             <div class="d-flex gap-2 justify-content-between align-items-center">
                 <div>
-                    <p class="mb-1">Total Orders</p>
+                    <p class="mb-1">Total Students</p>
                     <h2 class="h2 font-weight-semibold mt-1"><?= $studentsCount ?></h2>
                 </div>
                 <div class="ms-auto">

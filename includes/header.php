@@ -41,16 +41,23 @@
             <span class="ms-3 ">Students</span>
           </a>
         </li>
-        <li class="mt-2"><a href="./course.php" class="text-decoration-none p-2 d-flex align-items-center">
-            <span><i class="fa-solid fa-book fs-5"></i></span>
-            <span class="ms-4">Courses</span>
-          </a>
-        </li>
-        <li class="mt-2"><a href="./rooms.php" class="text-decoration-none p-2 d-flex align-items-center">
-            <span><i class="fa-solid fa-bed-pulse fs-5"></i></span>
-            <span class="ms-3">Rooms</span>
-          </a>
-        </li>
+        <?php
+        if ($_SESSION['role'] == "admin") {
+        ?>
+          <li class="mt-2"><a href="./course.php" class="text-decoration-none p-2 d-flex align-items-center">
+              <span><i class="fa-solid fa-book fs-5"></i></span>
+              <span class="ms-4">Courses</span>
+            </a>
+          </li>
+          <li class="mt-2"><a href="./rooms.php" class="text-decoration-none p-2 d-flex align-items-center">
+              <span><i class="fa-solid fa-bed-pulse fs-5"></i></span>
+              <span class="ms-3">Rooms</span>
+            </a>
+          </li>
+        <?php
+        }
+
+        ?>
 
         <li class="mt-2"><a href="./book-room.php" class="text-decoration-none p-2 d-flex align-items-center">
             <span><i class="fa-solid fa-check-to-slot fs-5"></i></span>
@@ -68,11 +75,17 @@
         }
 
         ?>
+        <?php
+        if ($_SESSION['role'] == "admin") {
+        ?>
+          <li class="mt-2"><a href="./blocks.php" class="text-decoration-none p-2 d-flex align-items-center">
+              <span><i class="fa-solid fa-table-cells-large fs-4"></i></span>
+              <span class="ms-3">Blocks</span>
+            </a></li>
+        <?php
+        }
 
-        <li class="mt-2"><a href="./blocks.php" class="text-decoration-none p-2 d-flex align-items-center">
-            <span><i class="fa-solid fa-table-cells-large fs-4"></i></span>
-            <span class="ms-3">Blocks</span>
-          </a></li>
+        ?>
         <li class="mt-2"><a href="./setting.php" class="text-decoration-none p-2 d-flex align-items-center">
             <span><i class="fa-solid fa-gear fs-4"></i></span>
             <span class="ms-3">Settings</span></a></li>
