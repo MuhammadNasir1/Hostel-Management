@@ -154,6 +154,7 @@ if (@isset($_REQUEST['edit'])) {
 
                                     ?>
                                 </select>
+                                <p id="availabilityMessage"></p>
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -213,6 +214,31 @@ if (@isset($_REQUEST['edit'])) {
         $('#room, #food_type').change(updateTotalFee);
 
         updateTotalFee();
+    });
+
+
+    $(document).ready(function() {
+        $('#room').change(function() {
+            var roomId = $(this).val();
+            console.log(roomId);
+            if (roomId) {
+                $.ajax({
+                    url: './phpAction/check_availability.php',
+                    type: 'GET',
+                    data: {
+                        room_id: roomId
+                    },
+                    success: function(response) {
+                        $('#availabilityMessage').html(response);
+                    },
+                    error: function() {
+                        $('#availabilityMessage').html('Error checking room availability.');
+                    }
+                });
+            } else {
+                $('#availabilityMessage').html('');
+            }
+        });
     });
 </script>
 <?php
