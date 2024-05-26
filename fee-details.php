@@ -81,8 +81,23 @@ include("./includes/header.php");
                         <td><button class="btn <?= (isset($data['fee_status']) && $data['fee_status'] == "pending") ? "bg-danger" : "bg-success" ?>
  text-white px-3 py-2 fw-semibold">
                                 <span></span> <?= $data['fee_status'] ?></button></< /td>
-                        <td> <button userId="<?= $data['id'] ?>" class="btn bg-primary text-white px-3 py-2 fw-semibold statusChangeBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <span></span> Change Status</button></td>
+                        <td>
+                            <div class="d-flex gap-4">
+                                <button userId="<?= $data['id'] ?>" class="btn bg-primary text-white px-3 py-2 fw-semibold statusChangeBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <span></span> Change Status</button>
+                                <?php
+                                if (@$data['fee_status'] == "paid") {
+
+                                ?>
+                                    <a href="./invoice/fee-invoice.php?student=<?= $data['id'] ?>" target="_blank"><button class="btn bg-warning text-white px-3 py-2 fw-semibold"><i class="fa-solid fa-print"></i> Print Invoice</button></a>
+
+                                <?php
+                                }
+
+                                ?>
+                            </div>
+                        </td>
+
                     </tr>
                 <?php
                 endwhile;
