@@ -99,6 +99,10 @@
               <h5 class="m-0 fs-5"><?= $_SESSION['user_name'] ?></h5>
               <p class="p-0 m-0"><?= $_SESSION['role'] ?></p>
             </div>
-            <img src="./img/user.png" alt="User" class="mt-1">
+            <!-- <img src="./img/user.png" alt="User" class="mt-1"> -->
+            <?php
+            $userImage = isset($_SESSION['user_image']) && !empty($_SESSION['user_image']) ? $_SESSION['user_image'] : 'img/user.png';
+            ?>
+            <img src="./<?= $userImage ?>" alt="User" class="mt-1">
           </div>
         </div>
