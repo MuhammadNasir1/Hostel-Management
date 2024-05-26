@@ -145,19 +145,13 @@ if (@isset($_REQUEST['edit'])) {
                                 <select name="room_id" id="room" class="form-select">
                                     <option selected disabled>Select Room</option>
                                     <?php
-                                    if (@isset($_REQUEST['edit'])) {
-                                        while ($row = mysqli_fetch_assoc($re)) :
+                                    while ($row = mysqli_fetch_assoc($re)) :
                                     ?>
-                                            <option <?= (@$updateData['room_id'] == $row['id']) ? 'selected' : ''; ?> value="<?= $row['id'] ?>" room-fees="<?= $row['room_fee'] ?>"><?= $row['room_no'] ?></option>
-                                        <?php
-                                        endwhile;
-                                    } else {
-
-                                        ?>
-
-                                        <option <?= (@$updateData['room_id'] == $row['id']) ? 'selected' : ''; ?> value="<?= $updateData['room_id'] ?>" room-fees="<?= $row['room_fee'] ?>"><?= $row['room_no'] ?></option>
+                                        <option <?= (@$updateData['room_id'] == $row['id']) ? 'selected' : ''; ?> value="<?= $row['id'] ?>" room-fees="<?= $row['room_fee'] ?>"><?= $row['room_no'] ?></option>
                                     <?php
-                                    }
+                                    endwhile;
+
+
                                     ?>
                                 </select>
                             </div>
