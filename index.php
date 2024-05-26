@@ -23,6 +23,29 @@ $roomsCount = fetchDataAndCount($conn, 'rooms');
 
 // Employes Data
 $employesCount = fetchDataAndCount($conn, 'employes');
+
+$sql_total_beds = "SELECT SUM(no_of_beds) as total_beds FROM rooms";
+$result_total_beds = $conn->query($sql_total_beds);
+
+if ($result_total_beds->num_rows > 0) {
+    $row_total_beds = $result_total_beds->fetch_assoc();
+    $total_beds = $row_total_beds['total_beds'];
+} else {
+    $total_beds = 0;
+}
+
+// Fetch the total number of booked beds across all rooms
+$sql_booked_beds = "SELECT COUNT(*) as booked_beds FROM room_registration";
+$result_booked_beds = $conn->query($sql_booked_beds);
+
+if ($result_booked_beds->num_rows > 0) {
+    $row_booked_beds = $result_booked_beds->fetch_assoc();
+    $booked_beds = $row_booked_beds['booked_beds'];
+} else {
+    $booked_beds = 0;
+}
+
+$conn->close();
 ?>
 
 <div class="dashboard-heading">
@@ -56,6 +79,32 @@ $employesCount = fetchDataAndCount($conn, 'employes');
             </div>
         </div>
     </div>
+    <div class="col">
+        <div class="card text-white  rounded-3he py-3 px-5" style="background-color: #067928;">
+            <div class="d-flex gap-2 justify-content-between align-items-center ">
+                <div>
+                    <p class="mb-1">Total Beds </p>
+                    <h2 class="h2 font-weight-semibold "><?= $total_beds ?></h2>
+                </div>
+                <div class="ms-auto">
+                    <i class="fa-solid fa-bed"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card text-white  rounded-3he py-3 px-5" style="background-color: #796406;">
+            <div class="d-flex gap-2 justify-content-between align-items-center ">
+                <div>
+                    <p class="mb-1">Booked Beds </p>
+                    <h2 class="h2 font-weight-semibold "><?= $booked_beds ?></h2>
+                </div>
+                <div class="ms-auto">
+                    <i class="fa-solid fa-bed-pulse"></i>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="col">
         <div class="card text-white rounded-3 py-3 px-5" style="background-color: #1b4332;">
@@ -71,7 +120,7 @@ $employesCount = fetchDataAndCount($conn, 'employes');
         </div>
     </div>
 
-    <div class="col">
+    <!-- <div class="col">
         <div class="card text-white rounded-3 py-3 px-5" style="background-color: #bc3908;">
             <div class="d-flex gap-2 justify-content-between align-items-center">
                 <div>
@@ -83,5 +132,5 @@ $employesCount = fetchDataAndCount($conn, 'employes');
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
