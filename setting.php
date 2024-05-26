@@ -42,8 +42,10 @@ include("./includes/header.php");
                     <input type="password" name="old_password" placeholder="Enter old password" id="oldPassword" class="form-control">
                 </div>
                 <div class="col-md-4 mt-4">
-                    <label for="newPassword" class="form-label text-primary">New Password</label>
-                    <input type="password" name="new_password" placeholder="Enter new password" id="newPassword" class="form-control">
+                    <label for="password" class="form-label text-primary">New Password</label>
+                    <input type="password" name="new_password" placeholder="Enter new password" id="password" class="form-control">
+                    <div id="message" class="invalid">Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.</div>
+
                 </div>
                 <div class="col-md-4 mt-4">
                     <label for="conPassword" class="form-label text-primary">Confirm Password</label>
@@ -72,6 +74,64 @@ include("./includes/header.php");
 
         if (file) {
             reader.readAsDataURL(file);
+        }
+    });
+
+    function validatePassword(password) {
+        const minLength = 8;
+        const hasUpperCase = /[A-Z]/;
+        const hasLowerCase = /[a-z]/;
+        const hasNumber = /[0-9]/;
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/;
+
+        if (password.length < minLength) {
+            return {
+                valid: false,
+                message: "Password must be at least 8 characters long."
+            };
+        }
+        if (!hasUpperCase.test(password)) {
+            return {
+                valid: false,
+                message: "Password must contain at least one uppercase letter."
+            };
+        }
+        if (!hasLowerCase.test(password)) {
+            return {
+                valid: false,
+                message: "Password must contain at least one lowercase letter."
+            };
+        }
+        if (!hasNumber.test(password)) {
+            return {
+                valid: false,
+                message: "Password must contain at least one number."
+            };
+        }
+        if (!hasSpecialChar.test(password)) {
+            return {
+                valid: false,
+                message: "Password must contain at least one special character."
+            };
+        }
+
+        return {
+            valid: true,
+            message: "Password is strong."
+        };
+    }
+
+    document.getElementById('password').addEventListener('input', function() {
+        const password = this.value;
+        const result = validatePassword(password);
+        const messageDiv = document.getElementById('message');
+
+        if (result.valid) {
+            messageDiv.textContent = result.message;
+            messageDiv.className = 'valid';
+        } else {
+            messageDiv.textContent = result.message;
+            messageDiv.className = 'invalid';
         }
     });
 </script>

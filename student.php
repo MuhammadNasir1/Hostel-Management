@@ -22,7 +22,8 @@ if (isset($_POST['save'])) {
 
     if (empty($id)) {
 
-        $insert = "INSERT INTO `students`(`name`, `roll_no`, `father_name`, `contact_no`, `course`, `gender`, `stu_email`, `stu_password`, `stu_cpassword`, `address`) VALUES ('$name','$roll_no','$father_name','$contact_no','$course','$gender','$stu_email','$stu_password','$stu_username','$address')";
+        // $insert = "INSERT INTO `students`(`name`, `roll_no`, `father_name`, `contact_no`, `course`, `gender`, `stu_email`, `stu_password`, `stu_cpassword`, `address`) VALUES ('$name','$roll_no','$father_name','$contact_no','$course','$gender','$stu_email','$stu_password','$stu_username','$address')";
+        $insert = "INSERT INTO `students`(`name`, `roll_no`, `father_name`, `contact_no`, `course`, `gender`,  `address`) VALUES ('$name','$roll_no','$father_name','$contact_no','$course','$gender','$address')";
 
         $user_insert = "INSERT INTO `users`(`user_name`, `email`, `password`, `role`) VALUES ('$stu_username','$stu_email','$stu_password','Student')";
         $query = mysqli_query($conn, $insert);

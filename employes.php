@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
     $emp_username = $_POST['emp_username'];
 
     if (empty($id)) {
-        $insert = "INSERT INTO `employes`(`emp_email`, `block_id`, `emp_type`, `emp_name`, `gender`, `date_of_birth`, `date_of_join`, `emp_username`) VALUES ('$email_id','$block_id','$emp_type','$emp_name','$emp_gender','$emp_dob','$emp_doj','$emp_username')";
+        $insert = "INSERT INTO `employes`(`emp_email`, `block_id`, `emp_type`, `emp_name`, `gender`, `date_of_birth`, `date_of_join`) VALUES ('$email_id','$block_id','$emp_type','$emp_name','$emp_gender','$emp_dob','$emp_doj')";
 
         $user = "INSERT INTO `users`(`user_name`, `email`, `password`, `role`) VALUES ('$emp_username','$email_id','$emp_password','employe')";
 
