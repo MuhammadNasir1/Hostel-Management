@@ -51,7 +51,7 @@ $conn->close();
 <div class="dashboard-heading">
     <h4 class="text-primary fw-semibold">Dashboard</h4>
 </div>
-<div class="row row-cols-1 row-cols-md-4 g-3 mt-2 dashboard">
+<div class="row row-cols-1 row-cols-xxl-4  row-cols-lg-2 g-3 mt-2 dashboard ">
     <div class="col">
         <div class="card text-white rounded-3 py-3 px-5" style="background-color: #1a759f;">
             <div class="d-flex gap-2 justify-content-between align-items-center">
