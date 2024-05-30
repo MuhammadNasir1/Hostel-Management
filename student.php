@@ -158,7 +158,7 @@ if (isset($_REQUEST['edit'])) {
 
                                 <div class="col-md-4 col-12">
                                     <label for="contact_no" class="form-label text-primary">Contact No</label>
-                                    <input type="number" min="0" placeholder="Enter Contact No" required name="contact_no" id="contact_no" class="form-control" value="<?= @$updateData['contact_no'] ?>">
+                                    <input type="number" min="0" placeholder="Enter Contact No" required name="contact_no" id="contact_no" class="form-control" value="<?= @$updateData['contact_no'] ?>" min="11" max="11">
                                 </div>
                                 <div class="col-md-4 col-12 mt-md-0 mt-3">
                                     <label for="course" class="form-label text-primary">Course</label>

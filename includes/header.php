@@ -22,75 +22,98 @@
         <a class="mx-auto" href="./"> <img height="130px" class="rounded mx-auto" src="./img/Logo-white.png" alt="Logo"></a>
         <button class="btn d-md-none d-block close-btn px-1 py-0 text-white"><i class="fal fa-stream"></i></button>
       </div>
-
-      <ul class="list-unstyled px-2">
-        <li class="active mt-2"><a href="index.php" class="text-decoration-none p-2 d-flex align-items-center">
-            <svg width="24" height="20" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M0.5 7.33333C0.5 7.88562 0.947715 8.33333 1.5 8.33333H6.16667C6.71895 8.33333 7.16667 7.88562 7.16667 7.33333V1C7.16667 0.447715 6.71895 0 6.16667 0H1.5C0.947714 0 0.5 0.447715 0.5 1V7.33333ZM0.5 14C0.5 14.5523 0.947715 15 1.5 15H6.16667C6.71895 15 7.16667 14.5523 7.16667 14V11C7.16667 10.4477 6.71895 10 6.16667 10H1.5C0.947714 10 0.5 10.4477 0.5 11V14ZM8.83333 14C8.83333 14.5523 9.28105 15 9.83333 15H14.5C15.0523 15 15.5 14.5523 15.5 14V7.66667C15.5 7.11438 15.0523 6.66667 14.5 6.66667H9.83333C9.28105 6.66667 8.83333 7.11438 8.83333 7.66667V14ZM9.83333 0C9.28105 0 8.83333 0.447715 8.83333 1V4C8.83333 4.55228 9.28105 5 9.83333 5H14.5C15.0523 5 15.5 4.55228 15.5 4V1C15.5 0.447715 15.0523 0 14.5 0H9.83333Z" fill="#FFFFFF" />
-            </svg>
-            <span class="ms-3">Dashboard</span>
-          </a></li>
-        <li class="mt-2">
-          <a href="./fee-details.php" class="text-decoration-none p-2 d-flex align-items-center">
-            <span><i class="fa-solid fa-comments-dollar fs-5"></i></span>
-            <span class="ms-3">Fees</span>
-          </a>
-        </li>
-        <li class="mt-2"><a href="./student.php" class="text-decoration-none p-2 d-flex align-items-center">
-            <span><i class="fa-solid fa-graduation-cap fs-5"></i></span>
-            <span class="ms-3 ">Students</span>
-          </a>
-        </li>
-        <?php
-        if ($_SESSION['role'] == "admin") {
-        ?>
-          <li class="mt-2"><a href="./course.php" class="text-decoration-none p-2 d-flex align-items-center">
-              <span><i class="fa-solid fa-book fs-5"></i></span>
-              <span class="ms-4">Courses</span>
-            </a>
-          </li>
-          <li class="mt-2"><a href="./rooms.php" class="text-decoration-none p-2 d-flex align-items-center">
-              <span><i class="fa-solid fa-bed-pulse fs-5"></i></span>
-              <span class="ms-3">Rooms</span>
-            </a>
-          </li>
-        <?php
-        }
-
-        ?>
-
-        <li class="mt-2"><a href="./book-room.php" class="text-decoration-none p-2 d-flex align-items-center">
-            <span><i class="fa-solid fa-check-to-slot fs-5"></i></span>
-            <span class="ms-3">Book Room</span>
-          </a>
-        </li>
-
-        <?php
-        if ($_SESSION['role'] == "admin") {
-        ?>
-          <li class="mt-2"><a href="./employes.php" class="text-decoration-none p-2 d-flex align-items-center">
-              <span><i class="fa-solid fa-users-line fs-5"></i></span>
-              <span class="ms-3">Employes</span></a></li>
-        <?php
-        }
-
-        ?>
-        <?php
-        if ($_SESSION['role'] == "admin") {
-        ?>
-          <li class="mt-2"><a href="./blocks.php" class="text-decoration-none p-2 d-flex align-items-center">
-              <span><i class="fa-solid fa-table-cells-large fs-4"></i></span>
-              <span class="ms-3">Blocks</span>
+      <?php
+      if ($_SESSION['role'] == "student") {
+      ?>
+        <ul class="list-unstyled px-2">
+          <li class="active mt-2"><a href="index.php" class="text-decoration-none p-2 d-flex align-items-center">
+              <svg width="24" height="20" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.5 7.33333C0.5 7.88562 0.947715 8.33333 1.5 8.33333H6.16667C6.71895 8.33333 7.16667 7.88562 7.16667 7.33333V1C7.16667 0.447715 6.71895 0 6.16667 0H1.5C0.947714 0 0.5 0.447715 0.5 1V7.33333ZM0.5 14C0.5 14.5523 0.947715 15 1.5 15H6.16667C6.71895 15 7.16667 14.5523 7.16667 14V11C7.16667 10.4477 6.71895 10 6.16667 10H1.5C0.947714 10 0.5 10.4477 0.5 11V14ZM8.83333 14C8.83333 14.5523 9.28105 15 9.83333 15H14.5C15.0523 15 15.5 14.5523 15.5 14V7.66667C15.5 7.11438 15.0523 6.66667 14.5 6.66667H9.83333C9.28105 6.66667 8.83333 7.11438 8.83333 7.66667V14ZM9.83333 0C9.28105 0 8.83333 0.447715 8.83333 1V4C8.83333 4.55228 9.28105 5 9.83333 5H14.5C15.0523 5 15.5 4.55228 15.5 4V1C15.5 0.447715 15.0523 0 14.5 0H9.83333Z" fill="#FFFFFF" />
+              </svg>
+              <span class="ms-3">Dashboard</span>
             </a></li>
-        <?php
-        }
 
-        ?>
-        <li class="mt-2"><a href="./setting.php" class="text-decoration-none p-2 d-flex align-items-center">
-            <span><i class="fa-solid fa-gear fs-4"></i></span>
-            <span class="ms-3">Settings</span></a></li>
-      </ul>
 
+          <li class="mt-2"><a href="./setting.php" class="text-decoration-none p-2 d-flex align-items-center">
+              <span><i class="fa-solid fa-gear fs-4"></i></span>
+              <span class="ms-3">Settings</span></a></li>
+        </ul>
+      <?php
+
+      } else {
+      ?>
+        <ul class="list-unstyled px-2">
+          <li class="active mt-2"><a href="index.php" class="text-decoration-none p-2 d-flex align-items-center">
+              <svg width="24" height="20" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.5 7.33333C0.5 7.88562 0.947715 8.33333 1.5 8.33333H6.16667C6.71895 8.33333 7.16667 7.88562 7.16667 7.33333V1C7.16667 0.447715 6.71895 0 6.16667 0H1.5C0.947714 0 0.5 0.447715 0.5 1V7.33333ZM0.5 14C0.5 14.5523 0.947715 15 1.5 15H6.16667C6.71895 15 7.16667 14.5523 7.16667 14V11C7.16667 10.4477 6.71895 10 6.16667 10H1.5C0.947714 10 0.5 10.4477 0.5 11V14ZM8.83333 14C8.83333 14.5523 9.28105 15 9.83333 15H14.5C15.0523 15 15.5 14.5523 15.5 14V7.66667C15.5 7.11438 15.0523 6.66667 14.5 6.66667H9.83333C9.28105 6.66667 8.83333 7.11438 8.83333 7.66667V14ZM9.83333 0C9.28105 0 8.83333 0.447715 8.83333 1V4C8.83333 4.55228 9.28105 5 9.83333 5H14.5C15.0523 5 15.5 4.55228 15.5 4V1C15.5 0.447715 15.0523 0 14.5 0H9.83333Z" fill="#FFFFFF" />
+              </svg>
+              <span class="ms-3">Dashboard</span>
+            </a></li>
+          <li class="mt-2">
+            <a href="./fee-details.php" class="text-decoration-none p-2 d-flex align-items-center">
+              <span><i class="fa-solid fa-comments-dollar fs-5"></i></span>
+              <span class="ms-3">Fees</span>
+            </a>
+          </li>
+          <li class="mt-2"><a href="./student.php" class="text-decoration-none p-2 d-flex align-items-center">
+              <span><i class="fa-solid fa-graduation-cap fs-5"></i></span>
+              <span class="ms-3 ">Students</span>
+            </a>
+          </li>
+          <?php
+          if ($_SESSION['role'] == "admin") {
+          ?>
+            <li class="mt-2"><a href="./course.php" class="text-decoration-none p-2 d-flex align-items-center">
+                <span><i class="fa-solid fa-book fs-5"></i></span>
+                <span class="ms-4">Courses</span>
+              </a>
+            </li>
+            <li class="mt-2"><a href="./rooms.php" class="text-decoration-none p-2 d-flex align-items-center">
+                <span><i class="fa-solid fa-bed-pulse fs-5"></i></span>
+                <span class="ms-3">Rooms</span>
+              </a>
+            </li>
+          <?php
+          }
+
+          ?>
+
+          <li class="mt-2"><a href="./book-room.php" class="text-decoration-none p-2 d-flex align-items-center">
+              <span><i class="fa-solid fa-check-to-slot fs-5"></i></span>
+              <span class="ms-3">Book Room</span>
+            </a>
+          </li>
+
+          <?php
+          if ($_SESSION['role'] == "admin") {
+          ?>
+            <li class="mt-2"><a href="./employes.php" class="text-decoration-none p-2 d-flex align-items-center">
+                <span><i class="fa-solid fa-users-line fs-5"></i></span>
+                <span class="ms-3">Employes</span></a></li>
+          <?php
+          }
+
+          ?>
+          <?php
+          if ($_SESSION['role'] == "admin") {
+          ?>
+            <li class="mt-2"><a href="./blocks.php" class="text-decoration-none p-2 d-flex align-items-center">
+                <span><i class="fa-solid fa-table-cells-large fs-4"></i></span>
+                <span class="ms-3">Blocks</span>
+              </a></li>
+          <?php
+          }
+
+          ?>
+          <li class="mt-2"><a href="./setting.php" class="text-decoration-none p-2 d-flex align-items-center">
+              <span><i class="fa-solid fa-gear fs-4"></i></span>
+              <span class="ms-3">Settings</span></a></li>
+        </ul>
+
+
+      <?php
+      }
+      ?>
       <ul class="list-unstyled px-2">
         <li class="position-absolute bottom-0 mb-4"><a href="./logout.php" class="text-decoration-none p-2 d-flex align-items-center">
             <span><svg width="25" height="25" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">

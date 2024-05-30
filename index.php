@@ -45,7 +45,7 @@ if ($result_booked_beds->num_rows > 0) {
     $booked_beds = 0;
 }
 
-$conn->close();
+// $conn->close();
 ?>
 
 <div class="dashboard-heading">
@@ -105,20 +105,25 @@ $conn->close();
             </div>
         </div>
     </div>
-
-    <div class="col">
-        <div class="card text-white rounded-3 py-3 px-5" style="background-color: #1b4332;">
-            <div class="d-flex gap-2 justify-content-between align-items-center">
-                <div>
-                    <p class="mb-1">Total Employes</p>
-                    <h2 class="h2 font-weight-semibold mt-1"><?= $employesCount ?></h2>
-                </div>
-                <div class="ms-auto">
-                    <i class="fa-solid fa-users-line"></i>
+    <?php
+    if ($_SESSION['role'] !== "student") {
+    ?>
+        <div class="col">
+            <div class="card text-white rounded-3 py-3 px-5" style="background-color: #1b4332;">
+                <div class="d-flex gap-2 justify-content-between align-items-center">
+                    <div>
+                        <p class="mb-1">Total Employes</p>
+                        <h2 class="h2 font-weight-semibold mt-1"><?= $employesCount ?></h2>
+                    </div>
+                    <div class="ms-auto">
+                        <i class="fa-solid fa-users-line"></i>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    <?php
+    }
+    ?>
 
     <!-- <div class="col">
         <div class="card text-white rounded-3 py-3 px-5" style="background-color: #bc3908;">
@@ -134,3 +139,76 @@ $conn->close();
         </div>
     </div> -->
 </div>
+<?php
+if ($_SESSION['role'] == "student") {
+    $userId =  $_SESSION['user_id'];
+?>
+    <div>
+        <table class="table table-responsive mt-5" id="myTable">
+            <thead>
+                <tr>
+                    <th class="bg-primary text-white">Sno.</th>
+                    <th class="bg-primary text-white">Student Name</th>
+                    <th class="bg-primary text-white">Roll No</th>
+                    <th class="bg-primary text-white">Joining Date (month start from)</th>
+                    <th class="bg-primary text-white">Fee per Month</th>
+                    <th class="bg-primary text-white">Fee Type (this month)</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+
+                $reg_res = mysqli_query($conn, "SELECT * FROM `room_registration` WHERE student_id =  $userId ");
+                $i  = 0;
+                while ($data = mysqli_fetch_assoc($reg_res)) :
+                    $i++;
+                    $student_id = $data['student_id'];
+
+                    // Query to get student data based on student_id
+                    $student_res = mysqli_query($conn, "SELECT * FROM `students` WHERE `id` = '$student_id'");
+                    $student_data = mysqli_fetch_assoc($student_res);
+
+
+                    $joinDate = new DateTime($data['fee_pay_date']);
+                    $currentDate = new DateTime();
+                    $interval = $joinDate->diff($currentDate);
+
+                    // Determine if one month has passed since the join date    
+                    $monthsPassed = $interval->m + ($interval->y * 12);
+                    if ($monthsPassed >= 1) {
+                        // Update the fee status to pending
+                        if (@$data['fee_status'] == "pending") {
+                            // Update the fee status to 'pending'
+                            $feeStatus = 'pending';
+                            // Update the database with the new fee status
+                            $conn->query("UPDATE room_registration SET fee_status = 'pending' WHERE student_id = $student_id LIMIT 1");
+                        } else {
+
+                            $feeStatus = 'paid';
+                            $conn->query("UPDATE room_registration SET fee_status = 'pending' WHERE student_id = $student_id LIMIT 1");
+                        }
+                    }
+
+                ?>
+                    <tr>
+                        <td><?= $i ?></td>
+                        <td><?= $student_data['name'] ?></td>
+                        <td><?= $student_data['roll_no'] ?></td>
+                        <td><?= $data['join_date'] ?></td>
+                        <td><?= $data['total_fee'] ?></td>
+                        <td><button class="btn <?= (isset($data['fee_status']) && $data['fee_status'] == "pending") ? "bg-danger" : "bg-success" ?>
+ text-white px-3 py-2 fw-semibold">
+                                <span></span> <?= $data['fee_status'] ?></button></< /td>
+
+                    </tr>
+                <?php
+                endwhile;
+                ?>
+            </tbody>
+        </table>
+    </div>
+
+<?php
+}
+?>
