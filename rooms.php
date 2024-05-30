@@ -129,8 +129,8 @@ if (isset($_REQUEST['edit'])) {
                         <input type="hidden" name="updateID" value="<?= @$updateData['id'] ?>">
                         <div class="row">
                             <div class="col-md-6 col-12">
-                                <label for="block" class="form-label text-primary">Block</label>
-                                <select name="block" id="block" class="form-select">
+                                <label for="block" class="form-label text-primary">Block <span class="text-danger">* </span></label>
+                                <select name="block" id="block" class="form-select" required>
                                     <?php
                                     while ($row = mysqli_fetch_assoc($res)) {
                                     ?>
@@ -141,8 +141,8 @@ if (isset($_REQUEST['edit'])) {
                                 </select>
                             </div>
                             <div class="col-md-6 col-12">
-                                <label for="no_of_beds" class="form-label text-primary">No Of Beds</label>
-                                <select name="no_of_beds" id="no_of_beds" class="form-select">
+                                <label for="no_of_beds" class="form-label text-primary">No Of Beds <span class="text-danger">* </span></label>
+                                <select name="no_of_beds" id="no_of_beds" class="form-select" required>
                                     <option <?= (@$updateData['no_of_beds'] == '1') ? 'selected' : ''; ?> value="1">One</option>
                                     <option <?= (@$updateData['no_of_beds'] == '2') ? 'selected' : ''; ?> value="2">Two</option>
                                     <option <?= (@$updateData['no_of_beds'] == '3') ? 'selected' : ''; ?> value="3">Three</option>
@@ -155,11 +155,11 @@ if (isset($_REQUEST['edit'])) {
 
                         <div class="row mt-3">
                             <div class="col-md-6 col-12">
-                                <label for="room_fee" class="form-label text-primary">Fees</label>
+                                <label for="room_fee" class="form-label text-primary">Fees <span class="text-danger">* </span></label>
                                 <input type="number" min="0" required name="room_fee" id="room_fee" class="form-control" placeholder="Enter Fee" value="<?= @$updateData['room_fee'] ?>">
                             </div>
                             <div class="col-md-6 col-12">
-                                <label for="room_no" class="form-label text-primary">Room No</label>
+                                <label for="room_no" class="form-label text-primary">Room No <span class="text-danger">* </span></label>
                                 <input type="number" min="0" required name="room_no" id="room_no" class="form-control" placeholder="Enter Room No" value="<?= @$updateData['room_no'] ?>">
                             </div>
 
@@ -168,7 +168,7 @@ if (isset($_REQUEST['edit'])) {
                         <div class="row mt-3 pe-0">
                             <div class="col-12 pe-0">
                                 <label for="room_description" class="form-label text-primary">Description</label>
-                                <textarea placeholder="Enter Room Description" required name="room_description" id="room_description" rows="3" class="form-control"><?= @$updateData['room_description'] ?></textarea>
+                                <textarea placeholder="Enter Room Description" name="room_description" id="room_description" rows="3" class="form-control"><?= @$updateData['room_description'] ?></textarea>
                             </div>
                         </div>
 

@@ -141,15 +141,15 @@ if (isset($_REQUEST['edit'])) {
                             <input type="hidden" name="updateID" value="<?= @$updateData['id'] ?>">
                             <div class="row">
                                 <div class="col-md-4 col-12">
-                                    <label for="name" class="form-label text-primary">Name</label>
-                                    <input type="text" placeholder="Enter Name" required name="name" id="name" class="form-control" value="<?= @$updateData['name'] ?>">
+                                    <label for="name" class="form-label text-primary">Name <span class="text-danger">* </span></label>
+                                    <input type="text" placeholder="Enter Name" required name="name" id="name" class="form-control" value="<?= @$updateData['name'] ?>" required>
                                 </div>
                                 <div class="col-md-4 col-12 mt-md-0 mt-3">
-                                    <label for="roll_no" class="form-label text-primary">Roll No</label>
+                                    <label for="roll_no" class="form-label text-primary">Roll No <span class="text-danger">* </span></label>
                                     <input type="number" min="0" placeholder="Enter Roll No" required name="roll_no" id="roll_no" class="form-control" value="<?= @$updateData['roll_no'] ?>">
                                 </div>
                                 <div class="col-md-4 col-12">
-                                    <label for="father_name" class="form-label text-primary">Father Name</label>
+                                    <label for="father_name" class="form-label text-primary">Father Name <span class="text-danger">* </span></label>
                                     <input type="text" placeholder="Enter Father Name" required name="father_name" id="father_name" class="form-control" value="<?= @$updateData['father_name'] ?>">
                                 </div>
                             </div>
@@ -157,13 +157,13 @@ if (isset($_REQUEST['edit'])) {
                             <div class="row mt-3 ">
 
                                 <div class="col-md-4 col-12">
-                                    <label for="contact_no" class="form-label text-primary">Contact No</label>
+                                    <label for="contact_no" class="form-label text-primary">Contact No <span class="text-danger">* </span></label>
                                     <input type="number" min="0" placeholder="Enter Contact No" required name="contact_no" id="contact_no" class="form-control" value="<?= @$updateData['contact_no'] ?>" min="11" max="11">
                                 </div>
                                 <div class="col-md-4 col-12 mt-md-0 mt-3">
                                     <label for="course" class="form-label text-primary">Course</label>
                                     <select class="form-select" required name="course" id="course" aria-label="Default select example">
-                                        <option selected disabled>Select Course</option>
+                                        <option selected disabled>Select Course </option>
                                         <?php
                                         while ($row = mysqli_fetch_assoc($re)) {
                                         ?>
@@ -174,7 +174,7 @@ if (isset($_REQUEST['edit'])) {
                                     </select>
                                 </div>
                                 <div class="col-md-4 col-12">
-                                    <label for="gender" class="form-label text-primary">Gender</label>
+                                    <label for="gender" class="form-label text-primary">Gender <span class="text-danger">* </span></label>
                                     <select class="form-select" name="gender" required id="gender" aria-label="Default select example">
                                         <option selected disabled>Select Gender</option>
                                         <option <?= (@$updateData['gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
@@ -186,7 +186,7 @@ if (isset($_REQUEST['edit'])) {
                                 <div class="row  pe-0">
                                     <div class="col-12 pe-0">
                                         <label for="address" class="form-label text-primary">Address</label>
-                                        <textarea placeholder="Enter Your Address" required name="address" id="address" rows="3" class="form-control"><?= @$updateData['address'] ?></textarea>
+                                        <textarea placeholder="Enter Your Address" name="address" id="address" rows="3" class="form-control"><?= @$updateData['address'] ?></textarea>
                                     </div>
                                 </div>
 
@@ -195,17 +195,17 @@ if (isset($_REQUEST['edit'])) {
                                 <h1 class="modal-title fs-5 fw-bold">Login Credentials</h1>
 
                                 <div class="col-lg-4 ">
-                                    <label for="stu_username" class="form-label text-primary">Username</label>
-                                    <input type="text" name="stu_username" placeholder="Enter Username" id="stu_username" class="form-control">
+                                    <label for="stu_username" class="form-label text-primary">Username <span class="text-danger">* </span></label>
+                                    <input type="text" name="stu_username" required placeholder="Enter Username" id="stu_username" class="form-control">
                                 </div>
 
                                 <div class="col-lg-4 mt-lg-0 mt-3">
-                                    <label for="stu_email" class="form-label text-primary">Email</label>
-                                    <input type="email" name="stu_email" placeholder="Enter Email Address" id="stu_email" class="form-control" value="<?= @$updateData['emp_email'] ?>">
+                                    <label for="stu_email" class="form-label text-primary">Email <span class="text-danger">* </span></label>
+                                    <input type="email" name="stu_email" required placeholder="Enter Email Address" id="stu_email" class="form-control" value="<?= @$updateData['emp_email'] ?>">
                                 </div>
                                 <div class="col-lg-4 mt-lg-0 mt-3">
-                                    <label for="password" class="form-label text-primary">Login Password</label>
-                                    <input type="password" name="stu_password" placeholder="Enter Login Password" id="password" class="form-control">
+                                    <label for="password" class="form-label text-primary">Login Password <span class="text-danger">* </span></label>
+                                    <input type="password" name="stu_password" placeholder="Enter Login Password" id="password" class="form-control" required>
                                     <div id="message" class="invalid">Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.</div>
                                 </div>
 

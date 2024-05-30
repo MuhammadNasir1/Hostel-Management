@@ -120,15 +120,15 @@ if (isset($_REQUEST['edit'])) {
                         <input type="hidden" name="updateID" value="<?= @$updateData['id'] ?>">
                         <div class="row">
                             <div class="col-md-4 col-12">
-                                <label for="course_name" class="form-label text-primary">Course Name</label>
-                                <input type="text" name="course_name" placeholder="Enter Course Name" id="course_name" class="form-control" value="<?= @$updateData['course_name'] ?>">
+                                <label for="course_name" class="form-label text-primary">Course Name <span class="text-danger">* </span></label>
+                                <input type="text" required name="course_name" placeholder="Enter Course Name" id="course_name" class="form-control" value="<?= @$updateData['course_name'] ?>">
                             </div>
                             <div class="col-md-4 col-12">
-                                <label for="no_of_year" class="form-label text-primary">No Of Year</label>
-                                <input type="number" min="1" name="no_of_year" id="no_of_year" placeholder="No Of Year" class="form-control" value="<?= @$updateData['no_of_year'] ?>">
+                                <label for="no_of_year" class="form-label text-primary">No Of Year <span class="text-danger">* </span></label>
+                                <input type="number" min="1" name="no_of_year" id="no_of_year" placeholder="No Of Year" required class="form-control" value="<?= @$updateData['no_of_year'] ?>">
                             </div>
                             <div class="col-md-4 col-12">
-                                <label for="course_status" class="form-label text-primary">Status</label>
+                                <label for="course_status" class="form-label text-primary">Status <span class="text-danger">* </span></label>
                                 <select name="course_status" id="course_status" class="form-select">
                                     <option <?= (@$updateData['course_status'] == 'Active') ? 'selected' : ''; ?> value="Active">Active</option>
                                     <option <?= (@$updateData['course_status'] == 'InActive') ? 'selected' : ''; ?> value="InActive">InActive</option>

@@ -153,16 +153,16 @@ if (isset($_REQUEST['edit'])) {
                         <div class="row mt-3">
 
                             <div class="col-lg-4">
-                                <label for="emp_type" class="form-label text-primary">Employe Type</label>
-                                <input type="text" name="emp_type" placeholder="Enter Employe Type" id="emp_type" class="form-control" value="<?= @$updateData['emp_type'] ?>">
+                                <label for="emp_type" class="form-label text-primary">Employe Type <span class="text-danger">* </span></label>
+                                <input type="text" name="emp_type" placeholder="Enter Employe Type" required id="emp_type" class="form-control" value="<?= @$updateData['emp_type'] ?>">
                             </div>
                             <div class="col-lg-4 mt-lg-0 mt-3">
-                                <label for="emp_name" class="form-label text-primary">Employe Name</label>
-                                <input type="text" name="emp_name" placeholder="Enter Employe Name" id="emp_name" class="form-control" value="<?= @$updateData['emp_name'] ?>">
+                                <label for="emp_name" class="form-label text-primary">Employe Name <span class="text-danger">* </span></label>
+                                <input type="text" name="emp_name" required placeholder="Enter Employe Name" id="emp_name" class="form-control" value="<?= @$updateData['emp_name'] ?>">
                             </div>
                             <div class="col-lg-4 mt-lg-0 mt-3">
-                                <label for="block_id" class="form-label text-primary">Block</label>
-                                <select name="block_id" id="block_id" class="form-select">
+                                <label for="block_id" class="form-label text-primary">Block <span class="text-danger">* </span></label>
+                                <select name="block_id" id="block_id" class="form-select" required>
                                     <?php
                                     while ($row = mysqli_fetch_assoc($res)) {
                                     ?>
@@ -177,8 +177,8 @@ if (isset($_REQUEST['edit'])) {
 
                         <div class="row mt-3">
                             <div class="col-lg-4">
-                                <label for="emp_gender" class="form-label text-primary">Gender</label>
-                                <select name="emp_gender" id="emp_gender" class="form-select">
+                                <label for="emp_gender" class="form-label text-primary">Gender <span class="text-danger">* </span></label>
+                                <select name="emp_gender" id="emp_gender" class="form-select" required>
                                     <option selected disabled>Select Gender</option>
                                     <option <?= (@$updateData['gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
                                     <option <?= (@$updateData['gender'] == 'Female') ? 'selected' : ''; ?>>Female</option>
@@ -186,12 +186,12 @@ if (isset($_REQUEST['edit'])) {
                                 </select>
                             </div>
                             <div class="col-lg-4  mt-lg-0 mt-3">
-                                <label for="emp_dob" class="form-label text-primary">Date Of Birth</label>
-                                <input type="date" name="emp_dob" id="emp_dob" class="form-control" value="<?= @$updateData['date_of_birth'] ?>">
+                                <label for="emp_dob" class="form-label text-primary">Date Of Birth <span class="text-danger">* </span></label>
+                                <input type="date" name="emp_dob" id="emp_dob" class="form-control" value="<?= @$updateData['date_of_birth'] ?>" required>
                             </div>
                             <div class="col-lg-4 mt-lg-0 mt-3">
-                                <label for="emp_doj" class="form-label text-primary">Date Of Joining</label>
-                                <input type="date" name="emp_doj" id="emp_doj" class="form-control" value="<?= @$updateData['date_of_join'] ?>">
+                                <label for="emp_doj" class="form-label text-primary">Date Of Joining <span class="text-danger">* </span></label>
+                                <input type="date" name="emp_doj" id="emp_doj" class="form-control" value="<?= @$updateData['date_of_join'] ?>" required>
                             </div>
 
                         </div>
@@ -200,16 +200,16 @@ if (isset($_REQUEST['edit'])) {
                             <h1 class="modal-title fs-5 fw-bold">Login Credentials</h1>
 
                             <div class="col-lg-4 ">
-                                <label for="emp_username" class="form-label text-primary">Username</label>
-                                <input type="text" name="emp_username" placeholder="Enter Username" id="emp_username" class="form-control">
+                                <label for="emp_username" class="form-label text-primary">Username <span class="text-danger">* </span></label>
+                                <input type="text" name="emp_username" required placeholder="Enter Username" id="emp_username" class="form-control" required>
                             </div>
                             <div class="col-lg-4 mt-lg-0 mt-3">
-                                <label for="email_id" class="form-label text-primary">Email</label>
-                                <input type="email" name="email_id" placeholder="Enter Email Address" id="email_id" class="form-control" value="<?= @$updateData['emp_email'] ?>">
+                                <label for="email_id" class="form-label text-primary">Email <span class="text-danger">* </span></label>
+                                <input type="email" name="email_id" placeholder="Enter Email Address" id="email_id" class="form-control" value="<?= @$updateData['emp_email'] ?>" required>
                             </div>
                             <div class="col-lg-4 mt-lg-0 mt-3">
-                                <label for="password" class="form-label text-primary">Login Password</label>
-                                <input type="password" name="emp_password" placeholder="Enter Login Password" id="password" class="form-control">
+                                <label for="password" class="form-label text-primary">Login Password <span class="text-danger">* </span></label>
+                                <input type="password" name="emp_password" placeholder="Enter Login Password" id="password" class="form-control" required>
                                 <div id="message" class="invalid">Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.</div>
 
                             </div>

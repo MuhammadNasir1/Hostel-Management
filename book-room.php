@@ -129,8 +129,8 @@ if (@isset($_REQUEST['edit'])) {
                         <input type="hidden" name="updateID" value="<?= @$updateData['id'] ?>">
                         <div class="row">
                             <div class="col-lg-6">
-                                <label for="student_id" class="form-label">Student</label>
-                                <select name="student_id" id="student_id" class="form-select">
+                                <label for="student_id" class="form-label">Student <span class="text-danger">* </span></label>
+                                <select name="student_id" id="student_id" class="form-select" required>
                                     <?php
                                     while ($row = mysqli_fetch_assoc($res)) {
                                     ?>
@@ -141,8 +141,8 @@ if (@isset($_REQUEST['edit'])) {
                                 </select>
                             </div>
                             <div class="col-lg-6 mt-lg-0 mt-3">
-                                <label for="room" class="form-label">Room</label>
-                                <select name="room_id" id="room" class="form-select">
+                                <label for="room" class="form-label">Room <span class="text-danger">* </span></label>
+                                <select name="room_id" id="room" class="form-select" required>
                                     <option selected disabled>Select Room</option>
                                     <?php
                                     while ($row = mysqli_fetch_assoc($re)) :
@@ -159,27 +159,27 @@ if (@isset($_REQUEST['edit'])) {
                         </div>
                         <div class="row mt-3">
                             <div class="col-lg-6">
-                                <label for="join_date" class="form-label">Join Date</label>
-                                <input type="date" name="join_date" id="join_date" class="form-control" value="<?= @$updateData['join_date'] ?>">
+                                <label for="join_date" class="form-label">Join Date <span class="text-danger">* </span></label>
+                                <input type="date" name="join_date" id="join_date" class="form-control" value="<?= @$updateData['join_date'] ?>" required>
                             </div>
                             <div class="col-lg-6 mt-lg-0 mt-3">
-                                <label for="fee_pay_date" class="form-label">Fee pay Date </label>
-                                <input type="date" name="fee_pay_date" id="fee_pay_date" class="form-control" value="<?= @$updateData['fee_pay_date'] ?>">
+                                <label for="fee_pay_date" class="form-label">Fee pay Date <span class="text-danger">* </span></label>
+                                <input type="date" name="fee_pay_date" id="fee_pay_date" class="form-control" value="<?= @$updateData['fee_pay_date'] ?>" required>
                                 <div class="form-text text-danger">Pay fees on this date every month</div>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-6">
-                                <label for="food_type" class="form-label">Food Status (Extra 2000Pkr)</label>
-                                <select name="food_type" id="food_type" class="form-select">
+                                <label for="food_type" class="form-label">Food Status (Extra 2000Pkr) <span class="text-danger">* </span></label>
+                                <select name="food_type" id="food_type" class="form-select" required>
                                     <option selected disabled>Select Food Status</option>
                                     <option food-price="2000" <?= (@$updateData['food_type'] == 'With Food') ? 'selected' : ''; ?> value="With Food">With Food</option>
                                     <option food-price="0" <?= (@$updateData['food_type'] == 'Without Food') ? 'selected' : ''; ?> value="Without Food">Without Food</option>
                                 </select>
                             </div>
                             <div class="col-lg-6 ">
-                                <label for="totalFee" class="form-label">Total Fees Per Month (readOnly)</label>
-                                <input type="text" name="total_fee" id="totalFee" class="form-control" value="<?= @$updateData['total_fee'] ?>">
+                                <label for="totalFee" class="form-label">Total Fees Per Month <span class="text-danger">* </span></label>
+                                <input type="text" name="total_fee" id="totalFee" class="form-control" min="2000" value="<?= @$updateData['total_fee'] ?>" required>
                             </div>
                         </div>
 
