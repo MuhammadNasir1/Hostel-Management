@@ -158,7 +158,9 @@ if (isset($_REQUEST['edit'])) {
 
                                 <div class="col-md-4 col-12">
                                     <label for="contact_no" class="form-label text-primary">Contact No <span class="text-danger">* </span></label>
-                                    <input type="number" min="0" placeholder="Enter Contact No" required name="contact_no" id="contact_no" class="form-control" value="<?= @$updateData['contact_no'] ?>" min="11" max="11">
+                                    <input type="number" placeholder="Enter Contact No" required name="contact_no" id="contact_no" class="form-control" value="<?= @$updateData['contact_no'] ?>" minlength="11" maxlength="11">
+                                    <div id="numbereror" class="invalid"></div>
+
                                 </div>
                                 <div class="col-md-4 col-12 mt-md-0 mt-3">
                                     <label for="course" class="form-label text-primary">Course</label>
@@ -286,6 +288,18 @@ include("./includes/footer.php")
         } else {
             messageDiv.textContent = result.message;
             messageDiv.className = 'invalid';
+        }
+    });
+    document.getElementById('contact_no').addEventListener('input', function() {
+        const minLengtha = 11;
+        const data = this.value;
+        const numbereror = document.getElementById('numbereror');
+
+        if (data.length < minLengtha) {
+            numbereror.innerHTML = "number must be 11 degits";
+        } else {
+            numbereror.textContent = "";
+            numbereror.className = 'invalid';
         }
     });
 </script>

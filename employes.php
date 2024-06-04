@@ -161,16 +161,9 @@ if (isset($_REQUEST['edit'])) {
                                 <input type="text" name="emp_name" required placeholder="Enter Employe Name" id="emp_name" class="form-control" value="<?= @$updateData['emp_name'] ?>">
                             </div>
                             <div class="col-lg-4 mt-lg-0 mt-3">
-                                <label for="block_id" class="form-label text-primary">Block <span class="text-danger">* </span></label>
-                                <select name="block_id" id="block_id" class="form-select" required>
-                                    <?php
-                                    while ($row = mysqli_fetch_assoc($res)) {
-                                    ?>
-                                        <option value="<?= $row['block_name'] ?>"><?= $row['block_name'] ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
+                                <label for="block_id" class="form-label text-primary">contact No <span class="text-danger">* </span></label>
+                                <input type="number" name="block_id" required placeholder="Enter Phone Number" id="contact_no" class="form-control" value="<?= @$updateData['emp_name'] ?>">
+                                <div id="numbereror" class="invalid"></div>
                             </div>
 
                         </div>
@@ -234,6 +227,19 @@ include("./includes/footer.php")
 ?>
 
 <script>
+    document.getElementById('contact_no').addEventListener('input', function() {
+        const minLengtha = 11;
+        const data = this.value;
+        const numbereror = document.getElementById('numbereror');
+
+        if (data.length < minLengtha) {
+            numbereror.innerHTML = "number must be 11 degits";
+        } else {
+            numbereror.textContent = "";
+            numbereror.className = 'invalid';
+        }
+    });
+
     function validatePassword(password) {
         const minLength = 8;
         const hasUpperCase = /[A-Z]/;

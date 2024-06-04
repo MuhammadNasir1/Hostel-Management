@@ -128,14 +128,12 @@
       <div class="dashboard-content">
         <div class="navbar d-flex justify-content-between py-3">
           <div>
-            <!-- <h3>Hostel Management System</h3> -->
           </div>
           <div class="d-flex gap-2">
             <div class="text-end">
               <h5 class="m-0 fs-5"><?= $_SESSION['user_name'] ?></h5>
               <p class="p-0 m-0"><?= $_SESSION['role'] ?></p>
             </div>
-            <!-- <img src="./img/user.png" alt="User" class="mt-1"> -->
             <?php
             $userImage = isset($_SESSION['user_image']) && !empty($_SESSION['user_image']) ? $_SESSION['user_image'] : 'img/user.png';
             ?>
