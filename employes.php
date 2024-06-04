@@ -102,7 +102,7 @@ if (isset($_REQUEST['edit'])) {
                     <th class="bg-primary text-white">Sno.</th>
                     <th class="bg-primary text-white">Employe Name</th>
                     <th class="bg-primary text-white">Email</th>
-                    <th class="bg-primary text-white">Emaploye Type</th>
+                    <th class="bg-primary text-white">Employe Type</th>
                     <th class="bg-primary text-white">DOJ</th>
                     <th class="bg-primary text-white">Action</th>
 
